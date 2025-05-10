@@ -1,0 +1,187 @@
+{% load static %}
+
+{# Resolve all menu URLs into variables #}
+{% url 'home' as home_url %}
+{% url 'about_us' as about_url %}
+{% url 'refund_policy' as refund_url %}
+{% url 'terms_condition' as terms_url %}
+{% url 'contact' as contact_url %}
+{% url 'myorders' as orders_url %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="Shop the best selection of high-quality audio devices online from Region Siciliana! Explore headphones, speakers, earbuds, microphones, and more. Enjoy premium sound and unbeatable prices. Free shipping available!">
+
+    <title>Region Siciliana  Your Audio Destination |  Speakers & More </title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/media/favicon.png' %}">
+    
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/slick-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/country-code.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+
+    <meta name="keywords" content="audio shop Region Siciliana, headphones, speakers, earbuds, microphones, sound systems, wireless headphones, bluetooth speakers, best audio devices, buy audio online Nigeria, audio store Benin City">
+
+    <meta name="author" content="Region Siciliana">
+
+    <meta http-equiv="content-language" content="en-US">
+
+    </head>
+
+<body class="tt-smooth-scroll">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader">
+            <svg class="cart" role="img" aria-label="Shopping cart line animation" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
+                    <g class="cart__track" stroke="hsla(0,10%,10%,0.1)">
+                        <polyline points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80" />
+                        <circle cx="43" cy="111" r="13" />
+                        <circle cx="102" cy="111" r="13" />
+                    </g>
+                    <g class="cart__lines" stroke="currentColor">
+                        <polyline class="cart__top" points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80" stroke-dasharray="338 338" stroke-dashoffset="-338" />
+                        <g class="cart__wheel1" transform="rotate(-90,43,111)">
+                            <circle class="cart__wheel-stroke" cx="43" cy="111" r="13" stroke-dasharray="81.68 81.68" stroke-dashoffset="81.68" />
+                        </g>
+                        <g class="cart__wheel2" transform="rotate(90,102,111)">
+                            <circle class="cart__wheel-stroke" cx="102" cy="111" r="13" stroke-dasharray="81.68 81.68" stroke-dashoffset="81.68" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <!-- Preloader -->
+
+    
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container" class="main-wrapper">
+      
+
+
+
+
+
+
+
+        {% include "../sections/nav.html" %}
+        {% block contents %}{% endblock contents %}
+        {% include "../sections/footer.html" %} 
+      
+
+
+
+
+
+
+
+
+    
+    
+    <!-- Jquery Js -->
+    <script src="{% static  'assets/js/vendor/bootstrap.min.js' %}"></script>
+    <script src="{% static  'assets/js/vendor/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static  'assets/js/vendor/slick.min.js' %}"></script>
+    <script src="{% static  'assets/js/vendor/jquery-validator.js' %}"></script>
+    <script src="{% static  'assets/js/vendor/jquery.countdown.min.js' %}"></script>
+    <script src="{% static  'assets/js/vendor/countryCode.js' %}"></script>
+
+    <script src="{% static  'assets/js/app.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 -->
+ 
+
+
+    
+
+<script>
+     document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+         button.addEventListener("click", function () {
+             const btn = this;
+             const spinner = btn.querySelector(".spinner-border");
+             const btnText = btn.querySelector(".btn-text");
+             const productId = btn.getAttribute("data-product-id");
+             const csrfToken = btn.getAttribute("data-csrf-token");
+             const addToCartUrl = btn.getAttribute("data-add-to-cart-url");
+ 
+             if (!addToCartUrl || !productId) {
+                 console.error("Product ID or Add-to-Cart URL is missing");
+                 return;
+             }
+ 
+             // ✅ Show spinner
+             spinner.classList.remove("d-none");
+             btnText.textContent = "Adding...";
+             btn.disabled = true;
+ 
+             fetch(addToCartUrl, {
+                 method: "POST",
+                 headers: {
+                     "Content-Type": "application/json",
+                     "X-CSRFToken": csrfToken
+                 },
+                 body: JSON.stringify({ product_id: productId })
+             })
+             .then(response => {
+                 if (response.ok) {
+                     return response.json();
+                 } else {
+                     // Handle non-200 responses
+                     return response.json().then(errorData => {
+                         throw new Error(errorData.error || "Failed to add to cart");
+                     });
+                 }
+             })
+             .then(data => {
+                 btn.disabled = false;
+                 spinner.classList.add("d-none");
+ 
+                 // 🎉 Show SweetAlert success message with reload
+                 Swal.fire({
+                     icon: 'success',
+                     title: 'Added to Cart!',
+                     text: 'The product has been added to your cart.',
+                     timer: 2000,
+                     showConfirmButton: false
+                 }).then(() => {
+                     window.location.reload(); // ✅ Reload page after alert closes
+                 });
+             })
+             .catch(error => {
+                 console.error("Error:", error);
+                 btn.disabled = false;
+                 spinner.classList.add("d-none");
+ 
+                 // Check if the error message indicates that login is required
+                 if (error.message === "Login is required to add items to the cart.") {
+                     // Redirect to the authentication URL
+                     window.location.href = "{% url 'authenticate' %}"; // Replace with your actual authentication URL
+                 } else {
+                     // ❌ Show SweetAlert error message
+                     Swal.fire({
+                         icon: 'error',
+                         title: 'Oops!',
+                         text: error.message, // Show the error message from the server
+                     });
+                 }
+             });
+         });
+     });
+ </script>
+ 
+
+
+
+</body>
+
+</html>

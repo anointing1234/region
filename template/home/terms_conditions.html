@@ -1,0 +1,156 @@
+{% extends "../core/base/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block contents %}
+   
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div style="padding:20px;" class="row">
+            <h4 class="mb-2 mt-2">Sales Terms & Conditions</h4>
+            <p>
+                The following terms and conditions (the “Terms”) apply to all purchases made on  
+                <a href="https://regionesicilianait.com">regionesicilianait.com</a>. By placing an order you make an offer to  
+                <strong>Regione Siciliana</strong> (“we/us/our”). That offer is accepted when we process your order and dispatch  
+                the items, creating a binding agreement between you and us.
+            </p>
+            <p>
+                Please read these Terms carefully before placing your order. They do not affect your statutory rights.
+            </p>
+
+            <h4 class="mb-2 mt-2">Acknowledgment and Receipt of Orders</h4>
+            <p>
+                Orders are acknowledged by email as soon as possible. Any acknowledgment does not constitute our legal  
+                acceptance; acceptance occurs only when we process and dispatch your items.
+            </p>
+            <p>
+                We will email you a copy of your receipt (either separately or within the acknowledgment). The receipt confirms  
+                we have received your payment authorization and serves as proof of purchase for any returns—please retain it.
+            </p>
+
+            <h4 class="mb-2 mt-2">Availability</h4>
+            <p>
+                All orders are subject to availability. If an item is unavailable, we will notify you and refund any payment made  
+                for that item. Only one special offer may be redeemed per order and per household.
+            </p>
+
+            <h4 class="mb-2 mt-2">14-Day Returns – Your Statutory Rights</h4>
+            <p>
+                To return items under your statutory rights, notify us within 14 days of receipt. You then have an additional  
+                14 days to return the items (28 days total). We will refund the cost of the items and standard return postage.  
+                Deductions may apply if items are not returned “as new,” or if promotional items are missing.
+            </p>
+
+            <h4 class="mb-2 mt-2">12-Month Guarantee</h4>
+            <p>
+                In addition to statutory rights, any item developing a fault within 12 months of delivery will be repaired or  
+                replaced free of charge, provided:
+            </p>
+            <ul>
+                <li>The fault arises from normal domestic use;</li>
+                <li>Normal wear and tear is excluded;</li>
+                <li>No unauthorized repairs have been made (this invalidates the guarantee).</li>
+            </ul>
+            <p>
+                Clearance items uneconomical to repair may, at our discretion, be refunded pro-rata.
+            </p>
+
+            <h4 class="mb-2 mt-2">Payment and Prices</h4>
+            <p>
+                All prices are as shown on the Site when you place your order. Once you order, prices are locked in. Errors will  
+                be corrected, and you’ll have the option to proceed at the correct price.
+            </p>
+            <p>
+                We accept payment by Bank Wire/Swift or direct bank transfer. Cheques and cash on delivery are not accepted.  
+                All prices are in € (EUR), inclusive of VAT but excluding delivery charges, which are shown at checkout.
+            </p>
+
+            <h4 class="mb-2 mt-2">Delivery</h4>
+            <p>
+                We deliver worldwide. Delivery times shown in our Purchase Procedure are estimates only; time is not of the essence.  
+                If delivery is delayed more than 7 working days beyond the estimated date, you may cancel for a full refund.
+            </p>
+            <p>
+                Title passes on delivery. Please inspect items immediately; you’re responsible for them once the carrier attempts  
+                delivery and obtains your signature.
+            </p>
+
+            <h4 class="mb-2 mt-2">Liability</h4>
+            <p>
+                We use reasonable care in descriptions but cannot guarantee all specifications remain current. If items fail to  
+                match the description at purchase, we will collect and refund you upon proof of purchase.
+            </p>
+            <p>
+                We are not liable for delays or failures caused by events beyond our control (force majeure), nor for any indirect  
+                or consequential losses.
+            </p>
+
+            <h4 class="mb-2 mt-2">Complaint Procedure</h4>
+            <p>
+                We aim to acknowledge all complaints within 7 working days. Please contact us first at:
+            </p>
+            <address>
+                <strong>REGIONE SICILIANA</strong><br>
+                PIAZZA INDIPENDENZA 21,<br>
+                90129 PALERMO, ITALY<br>
+                VAT No. 02711070827<br>
+                Email: <a href="mailto:support@regionesicilianait.com">support@regionesicilianait.com</a><br>
+                WhatsApp: <a href="https://wa.me/393511332891">+39 351 133 2891</a>
+            </address>
+            <p>
+                If unresolved, you may refer your complaint to Alternative Dispute Resolution for Retail via  
+                <a href="https://regionesicilianait.com">regionesicilianait.com</a>.
+            </p>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+
+
+    <!-- Mobile Menu Start -->
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+            <div class="logo-box">
+                <a href="{% url 'home' %} " aria-label="logo image"><img src="{% static 'assets/media/mobile-logo.png' %}" alt=""></a>
+            </div>
+            <div class="mobile-nav__container"></div>
+            <ul class="mobile-nav__contact list-unstyled">
+                                     <li>
+  <a href="{% url 'cart' %}"
+     class="{% if request.path == request.build_absolute_uri|cut:request.get_host %}{% url 'cart' %}active{% endif %}">
+      Shoping cart
+  </a>
+</li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:example@company.com">info@regionesicilianait.com
+</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:+393511332891">+393511332891</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu End -->
+
+
+
+
+
+
+{% endblock contents %}  

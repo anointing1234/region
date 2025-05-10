@@ -1,0 +1,930 @@
+{% load static %}
+{% load humanize %}
+{% url 'home' as home_url %}
+{% url 'about_us' as about_url %}
+{% url 'refund_policy' as refund_url %}
+{% url 'terms_condition' as terms_url %}
+{% url 'contact' as contact_url %}
+{% url 'myorders' as orders_url %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="Shop the best selection of high-quality audio devices online from Region Siciliana! Explore headphones, speakers, earbuds, microphones, and more. Enjoy premium sound and unbeatable prices. Free shipping available!">
+
+    <title>Region Siciliana  Your Audio Destination |  Speakers & More </title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/media/favicon.png' %}">
+    
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/slick-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/country-code.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+
+    <meta name="keywords" content="audio shop Region Siciliana, headphones, speakers, earbuds, microphones, sound systems, wireless headphones, bluetooth speakers, best audio devices, buy audio online Nigeria, audio store Benin City">
+
+    <meta name="author" content="Region Siciliana">
+
+    <meta http-equiv="content-language" content="en-US">
+
+    </head>
+
+<body class="tt-smooth-scroll">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader">
+            <svg class="cart" role="img" aria-label="Shopping cart line animation" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
+                    <g class="cart__track" stroke="hsla(0,10%,10%,0.1)">
+                        <polyline points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80" />
+                        <circle cx="43" cy="111" r="13" />
+                        <circle cx="102" cy="111" r="13" />
+                    </g>
+                    <g class="cart__lines" stroke="currentColor">
+                        <polyline class="cart__top" points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80" stroke-dasharray="338 338" stroke-dashoffset="-338" />
+                        <g class="cart__wheel1" transform="rotate(-90,43,111)">
+                            <circle class="cart__wheel-stroke" cx="43" cy="111" r="13" stroke-dasharray="81.68 81.68" stroke-dashoffset="81.68" />
+                        </g>
+                        <g class="cart__wheel2" transform="rotate(90,102,111)">
+                            <circle class="cart__wheel-stroke" cx="102" cy="111" r="13" stroke-dasharray="81.68 81.68" stroke-dashoffset="81.68" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <!-- Preloader -->
+
+  
+      
+
+
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+      
+<!-- Header Menu Start -->
+  <header>
+    <div class="header-section">
+      
+        <div class="container-fluid">
+            <div class="header-center">
+                <a href="{% url 'home' %} " class="header-logo">
+                    <img src="{% static 'assets/media/logo.png' %}" alt="">
+                </a>
+                <div class="mixin-container d-xl-flex d-none">
+                    <div class="vr-line vr-line-2"></div>
+                    <form action="{% url 'home' %} " method="post">
+                        <div class="input-field">
+                            <input type="text" name="search" id="searchInput" class="form-control" placeholder="Search for products...">
+                            <button type="submit" class="cus-btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="header-buttons">
+                 <a class="button-block align-items-sm-unset align-items-end">
+                        <img src="{% static 'assets/media/users/user-3.png' %}" alt="" class="user">
+                        <div>
+                            {% if not user.is_authenticated %}
+                                <p><a href="{% url 'login_view' %}">Login</a></p>
+                            {% endif %}
+                            <h6>{{ request.user.username }}</h6>
+                        </div>
+                    </a>
+                    {% if not user.is_authenticated %}
+                     {% else %}
+                     <a href="{% url 'cart' %}" class="button-block d-sm-flex d-none cart-button">
+                           <i class="fa fa-shopping-cart"></i>
+                                <div class="qty cart-count"  id="cart-count1">0</div>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mixin-container d-xl-none d-flex">
+
+                <div class="vr-line vr-line-2"></div>
+                <div class="input-field">
+                    <input type="text" name="search" id="searchInput2" class="form-control" placeholder="Search for products...">
+                    <button type="submit" class="cus-btn">Search</button>
+                </div>
+            </div>
+            
+            <div class="header-bottom-area">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                     <!-- Categories Dropdown -->
+                    <div class="nav-container">
+                        <nav class="all-category-nav">
+                            <label class="open-menu-all" for="open-menu-all">
+                                <input class="input-menu-all" id="open-menu-all" type="checkbox" name="menu-open">
+                                <span class="all-navigator"><i class="fas fa-bars" aria-hidden="true"></i> <span>Browse All Categories</span>
+                                </span>
+                               <span class="all-category-list list-unstyled">
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Amplifiers' %}" class="all-category-list-link dark-black fw-500">Amplifiers</a>
+                                </span>
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Digital' %}" class="all-category-list-link dark-black fw-500">Digital</a>
+                                </span>
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Loudspeakers' %}" class="all-category-list-link dark-black fw-500">Loudspeakers</a>
+                                </span>
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Mixer Console' %}" class="all-category-list-link dark-black fw-500">Mixer Console</a>
+                                </span>
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Turntables' %}" class="all-category-list-link dark-black fw-500">Turntables</a>
+                                </span>
+                            </span>
+
+                            </label>
+                        </nav>
+                    </div>
+                    <!-- Categories Dropdown -->
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                           <ul class="main-menu__list">
+                            <li>
+                                <a href="{{ home_url }}"
+                                class="{% if request.path == home_url %}active{% endif %}">
+                                    Home Page
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ about_url }}"
+                                class="{% if request.path == about_url %}active{% endif %}">
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ refund_url }}"
+                                class="{% if request.path == refund_url %}active{% endif %}">
+                                    Refund Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ terms_url }}"
+                                class="{% if request.path == terms_url %}active{% endif %}">
+                                    Electronic Store
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ contact_url }}"
+                                class="{% if request.path == contact_url %}active{% endif %}">
+                                    Contact Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ orders_url }}"
+                                class="{% if request.path == orders_url %}active{% endif %}">
+                                    Orders
+                                </a>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="main-menu__right">
+                        <div class="d-sm-flex d-none gap-2">
+                        </div>
+                        <a href="#" class="main-menu__toggler mobile-nav__toggler">
+                            <img src="{% static 'assets/media/icons/menu-2.png' %}" alt="">
+                            Menu
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header Menu End -->
+
+
+
+
+
+
+        <!-- Main Sections -->
+        <main class="main-wrapper bg-lightest-gray">
+
+            <!-- Title Banner Start -->
+            <section class="title-banner">
+                <div class="container-fluid">
+                    <div class="banner-wrapper">
+                        <img src="assets/media/banner/left-image.png" alt="" class="banner-image1">
+                        <h1 class="dark-black fw-600">Checkout</h1>
+                        <img src="assets/media/banner/right-image.png" alt="" class="banner-image2">
+                    </div>
+                </div>
+            </section>
+            <!-- Title Banner End -->
+
+       
+    
+            <!-- Billing Details Start -->
+            <section class="billing-detail pb-40">
+                <div class="container-fluid">
+                    <div class="row row-gap-4">
+                        <div class="col-xl-8">
+                            <div class="title-row title-row-2 bg-white mb-16">
+                                <h5>Billing Details</h5>
+                            </div>
+                            <div class="billing-wrapper p-24 bg-white br-10 mb-40">
+                                <form  method="post">
+                                        {% csrf_token %}
+                                    <div class="row">
+                                        
+                                      
+                                        <div class="col-md-6">
+                                            <div class="input-block mb-16">
+                                                <input type="email" name="email" id="e-mail" class="form-control" placeholder="Email Address">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+                                                    <g clip-path="url(#clip0_7968_53870)">
+                                                        <path
+                                                            d="M18.7422 2.96875H2.25781C1.2866 2.96875 0.5 3.76023 0.5 4.72656V15.2734C0.5 16.2455 1.29238 17.0312 2.25781 17.0312H18.7422C19.7053 17.0312 20.5 16.2488 20.5 15.2734V4.72656C20.5 3.76195 19.7165 2.96875 18.7422 2.96875ZM18.496 4.14062C18.1369 4.49785 11.9564 10.6458 11.743 10.8581C11.4109 11.1901 10.9695 11.3729 10.5 11.3729C10.0305 11.3729 9.58906 11.1901 9.25594 10.857C9.11242 10.7142 3.00012 4.63414 2.50398 4.14062H18.496ZM1.67188 15.0349V4.96582L6.73586 10.0031L1.67188 15.0349ZM2.50473 15.8594L7.56672 10.8296L8.4284 11.6867C8.98176 12.2401 9.71746 12.5448 10.5 12.5448C11.2825 12.5448 12.0182 12.2401 12.5705 11.6878L13.4333 10.8296L18.4953 15.8594H2.50473ZM19.3281 15.0349L14.2641 10.0031L19.3281 4.96582V15.0349Z"
+                                                            fill="#141516" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_7968_53870">
+                                                            <rect width="20" height="20" fill="white" transform="translate(0.5)" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-block mb-16">
+                                                <input type="tel" name="phone" id="phoneNumber" class="form-control" placeholder="Phone Number">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M16.2509 15.5304L15.8338 14.8339C15.0836 13.5971 14.0484 12.1776 12.6904 12.1776C12.4389 12.1776 12.1897 12.2282 11.9431 12.3307L11.2142 12.6432C11.1477 12.6708 11.083 12.7022 11.0145 12.7355C10.828 12.8262 10.6165 12.929 10.3989 12.929C9.86217 12.929 9.2403 12.2305 8.64811 10.9623C8.06692 9.71762 8.10399 9.06508 8.23741 8.73673C8.38462 8.37447 8.72695 8.21959 9.09471 8.08041C9.14585 8.06101 9.19204 8.04342 9.23696 8.02493L9.97501 7.71418C11.8978 6.9101 11.1825 4.10014 10.948 3.17889L10.7491 2.3868C10.579 1.734 10.1282 0 8.63277 0C8.35594 0 8.06061 0.064496 7.75527 0.191774C7.55492 0.271334 4.79792 1.39672 3.79909 3.37382C2.60532 5.72716 2.82605 8.88296 4.45451 12.7515C6.07079 16.625 8.16669 18.9942 10.684 19.7933C11.1158 19.9305 11.6038 19.9999 12.1346 19.9999H12.1349C13.8721 19.9999 15.587 19.2608 15.7262 19.1994C16.3251 18.9457 16.7123 18.5601 16.8768 18.0532C17.1557 17.1937 16.6878 16.2519 16.2509 15.5304ZM15.5897 17.6356C15.5514 17.7534 15.4185 17.8609 15.1948 17.9551C15.1911 17.9567 15.1866 17.9586 15.1828 17.9603C15.1673 17.9672 13.615 18.647 12.1345 18.6469C11.7428 18.6469 11.3926 18.5988 11.0935 18.5037C8.97266 17.8305 7.1592 15.72 5.70231 12.2286C4.23459 8.7416 4.00006 5.96837 5.0062 3.98495C5.78746 2.43858 8.23335 1.45761 8.25734 1.44823C8.26221 1.44625 8.26699 1.44435 8.27177 1.44237C8.41105 1.38391 8.53589 1.35306 8.63277 1.35306C8.9309 1.35306 9.20223 1.81545 9.43803 2.72173L9.63602 3.51048C10.0632 5.18828 9.99819 6.23772 9.45129 6.46647L8.71675 6.77587C8.68753 6.78796 8.65334 6.80068 8.61563 6.81502C8.20989 6.96864 7.36558 7.28814 6.98375 8.22735C6.63727 9.0796 6.7807 10.1615 7.42178 11.535C8.28521 13.3835 9.25897 14.2821 10.3987 14.2821C10.9277 14.2821 11.3523 14.0757 11.6059 13.9525C11.6526 13.9298 11.6944 13.909 11.7393 13.8904L12.4693 13.5774C12.5446 13.546 12.6169 13.5307 12.6903 13.5307C13.0417 13.5307 13.6717 13.8786 14.6749 15.5325L15.0918 16.2285C15.6055 17.0767 15.6461 17.4618 15.5897 17.6356Z"
+                                                        fill="#141516" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input-block mb-16">
+                                                <input type="text" name="address" id="location" class="form-control" placeholder="Your Address House or Street Name">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M9.51246 19.7391C9.62113 19.9021 9.8041 20 10 20C10.1959 20 10.3789 19.9021 10.4875 19.7391C11.8742 17.6591 13.9167 15.0903 15.34 12.4778C16.478 10.3889 17.0312 8.60727 17.0312 7.03125C17.0312 3.15422 13.877 0 10 0C6.12297 0 2.96875 3.15422 2.96875 7.03125C2.96875 8.60727 3.52199 10.3889 4.66004 12.4778C6.08227 15.0883 8.12863 17.6634 9.51246 19.7391ZM10 1.17188C13.2309 1.17188 15.8594 3.80039 15.8594 7.03125C15.8594 8.40641 15.3529 10.0046 14.3109 11.9171C13.0841 14.1691 11.3334 16.4534 10 18.3738C8.66684 16.4537 6.91602 14.1692 5.6891 11.9171C4.64715 10.0046 4.14062 8.40641 4.14062 7.03125C4.14062 3.80039 6.76914 1.17188 10 1.17188Z"
+                                                        fill="#141516" />
+                                                    <path
+                                                        d="M10 10.5469C11.9385 10.5469 13.5156 8.96977 13.5156 7.03125C13.5156 5.09273 11.9385 3.51562 10 3.51562C8.06148 3.51562 6.48438 5.09273 6.48438 7.03125C6.48438 8.96977 8.06148 10.5469 10 10.5469ZM10 4.6875C11.2923 4.6875 12.3438 5.73891 12.3438 7.03125C12.3438 8.32359 11.2923 9.375 10 9.375C8.70766 9.375 7.65625 8.32359 7.65625 7.03125C7.65625 5.73891 8.70766 4.6875 10 4.6875Z"
+                                                        fill="#141516" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input-block mb-16">
+                                                <input type="text" name="apartment" id="apartMent" class="form-control" placeholder="Apartment, Suite, Unit, ect. (optional)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M9.51246 19.7391C9.62113 19.9021 9.8041 20 10 20C10.1959 20 10.3789 19.9021 10.4875 19.7391C11.8742 17.6591 13.9167 15.0903 15.34 12.4778C16.478 10.3889 17.0312 8.60727 17.0312 7.03125C17.0312 3.15422 13.877 0 10 0C6.12297 0 2.96875 3.15422 2.96875 7.03125C2.96875 8.60727 3.52199 10.3889 4.66004 12.4778C6.08227 15.0883 8.12863 17.6634 9.51246 19.7391ZM10 1.17188C13.2309 1.17188 15.8594 3.80039 15.8594 7.03125C15.8594 8.40641 15.3529 10.0046 14.3109 11.9171C13.0841 14.1691 11.3334 16.4534 10 18.3738C8.66684 16.4537 6.91602 14.1692 5.6891 11.9171C4.64715 10.0046 4.14062 8.40641 4.14062 7.03125C4.14062 3.80039 6.76914 1.17188 10 1.17188Z"
+                                                        fill="#141516" />
+                                                    <path
+                                                        d="M10 10.5469C11.9385 10.5469 13.5156 8.96977 13.5156 7.03125C13.5156 5.09273 11.9385 3.51562 10 3.51562C8.06148 3.51562 6.48438 5.09273 6.48438 7.03125C6.48438 8.96977 8.06148 10.5469 10 10.5469ZM10 4.6875C11.2923 4.6875 12.3438 5.73891 12.3438 7.03125C12.3438 8.32359 11.2923 9.375 10 9.375C8.70766 9.375 7.65625 8.32359 7.65625 7.03125C7.65625 5.73891 8.70766 4.6875 10 4.6875Z"
+                                                        fill="#141516" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-block mb-16">
+                                                <input type="text" name="town" id="city" class="form-control" placeholder="Town / City">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M9.51246 19.7391C9.62113 19.9021 9.8041 20 10 20C10.1959 20 10.3789 19.9021 10.4875 19.7391C11.8742 17.6591 13.9167 15.0903 15.34 12.4778C16.478 10.3889 17.0312 8.60727 17.0312 7.03125C17.0312 3.15422 13.877 0 10 0C6.12297 0 2.96875 3.15422 2.96875 7.03125C2.96875 8.60727 3.52199 10.3889 4.66004 12.4778C6.08227 15.0883 8.12863 17.6634 9.51246 19.7391ZM10 1.17188C13.2309 1.17188 15.8594 3.80039 15.8594 7.03125C15.8594 8.40641 15.3529 10.0046 14.3109 11.9171C13.0841 14.1691 11.3334 16.4534 10 18.3738C8.66684 16.4537 6.91602 14.1692 5.6891 11.9171C4.64715 10.0046 4.14062 8.40641 4.14062 7.03125C4.14062 3.80039 6.76914 1.17188 10 1.17188Z"
+                                                        fill="#141516" />
+                                                    <path
+                                                        d="M10 10.5469C11.9385 10.5469 13.5156 8.96977 13.5156 7.03125C13.5156 5.09273 11.9385 3.51562 10 3.51562C8.06148 3.51562 6.48438 5.09273 6.48438 7.03125C6.48438 8.96977 8.06148 10.5469 10 10.5469ZM10 4.6875C11.2923 4.6875 12.3438 5.73891 12.3438 7.03125C12.3438 8.32359 11.2923 9.375 10 9.375C8.70766 9.375 7.65625 8.32359 7.65625 7.03125C7.65625 5.73891 8.70766 4.6875 10 4.6875Z"
+                                                        fill="#141516" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-block mb-16">
+                                                <input type="text" name="country" id="region" class="form-control" placeholder="Country / Region">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M9.51246 19.7391C9.62113 19.9021 9.8041 20 10 20C10.1959 20 10.3789 19.9021 10.4875 19.7391C11.8742 17.6591 13.9167 15.0903 15.34 12.4778C16.478 10.3889 17.0312 8.60727 17.0312 7.03125C17.0312 3.15422 13.877 0 10 0C6.12297 0 2.96875 3.15422 2.96875 7.03125C2.96875 8.60727 3.52199 10.3889 4.66004 12.4778C6.08227 15.0883 8.12863 17.6634 9.51246 19.7391ZM10 1.17188C13.2309 1.17188 15.8594 3.80039 15.8594 7.03125C15.8594 8.40641 15.3529 10.0046 14.3109 11.9171C13.0841 14.1691 11.3334 16.4534 10 18.3738C8.66684 16.4537 6.91602 14.1692 5.6891 11.9171C4.64715 10.0046 4.14062 8.40641 4.14062 7.03125C4.14062 3.80039 6.76914 1.17188 10 1.17188Z"
+                                                        fill="#141516" />
+                                                    <path
+                                                        d="M10 10.5469C11.9385 10.5469 13.5156 8.96977 13.5156 7.03125C13.5156 5.09273 11.9385 3.51562 10 3.51562C8.06148 3.51562 6.48438 5.09273 6.48438 7.03125C6.48438 8.96977 8.06148 10.5469 10 10.5469ZM10 4.6875C11.2923 4.6875 12.3438 5.73891 12.3438 7.03125C12.3438 8.32359 11.2923 9.375 10 9.375C8.70766 9.375 7.65625 8.32359 7.65625 7.03125C7.65625 5.73891 8.70766 4.6875 10 4.6875Z"
+                                                        fill="#141516" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                  
+                                        <div class="col-md-6">
+                                            <div class="input-block mb-16">
+                                                <input type="text" name="postal" id="zip" class="form-control" placeholder="Postcode / Zip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M9.51246 19.7391C9.62113 19.9021 9.8041 20 10 20C10.1959 20 10.3789 19.9021 10.4875 19.7391C11.8742 17.6591 13.9167 15.0903 15.34 12.4778C16.478 10.3889 17.0312 8.60727 17.0312 7.03125C17.0312 3.15422 13.877 0 10 0C6.12297 0 2.96875 3.15422 2.96875 7.03125C2.96875 8.60727 3.52199 10.3889 4.66004 12.4778C6.08227 15.0883 8.12863 17.6634 9.51246 19.7391ZM10 1.17188C13.2309 1.17188 15.8594 3.80039 15.8594 7.03125C15.8594 8.40641 15.3529 10.0046 14.3109 11.9171C13.0841 14.1691 11.3334 16.4534 10 18.3738C8.66684 16.4537 6.91602 14.1692 5.6891 11.9171C4.64715 10.0046 4.14062 8.40641 4.14062 7.03125C4.14062 3.80039 6.76914 1.17188 10 1.17188Z"
+                                                        fill="#141516" />
+                                                    <path
+                                                        d="M10 10.5469C11.9385 10.5469 13.5156 8.96977 13.5156 7.03125C13.5156 5.09273 11.9385 3.51562 10 3.51562C8.06148 3.51562 6.48438 5.09273 6.48438 7.03125C6.48438 8.96977 8.06148 10.5469 10 10.5469ZM10 4.6875C11.2923 4.6875 12.3438 5.73891 12.3438 7.03125C12.3438 8.32359 11.2923 9.375 10 9.375C8.70766 9.375 7.65625 8.32359 7.65625 7.03125C7.65625 5.73891 8.70766 4.6875 10 4.6875Z"
+                                                        fill="#141516" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                     
+
+                                      
+
+
+                                        
+                                    </div>
+                                </form>
+                            
+                                <!-- Different Billing Address Form -->
+                            </div>
+                         
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="title-row title-row-2 mb-16">
+                                <h5>Order Summary</h5>
+                            </div>
+                            <div class="summary-container bg-white">
+                                     {% for item in cart_items %}
+                                <div class="item-container mb-16">
+                                    <div class="left-box d-flex align-items-center gap-16">
+                                        <div class="icon-box">
+                                            <img src="{{ item.product.image.url }}" alt="Product image">
+                                        </div>
+                                        <a href="shop-detail.html" class="h6">{{ item.product.name|upper }} × {{ item.quantity }}</a>
+                                    </div>
+                                    <div class="right-box">
+                                        <h6 class="light-gray">€{{ item.total_price|floatformat:2|intcomma }}</h6>
+                                    </div>
+                                </div>
+                                <div class="hr-line mb-16"></div>
+                                    {% endfor %}
+
+
+                              
+                                <div class="hr-line mb-16"></div>
+                                <div class="d-flex align-items-center justify-content-between mb-16">
+                                    <h6>Shipping fee</h6>
+                                    <h6 class="light-gray">€{{ shipping_fee|floatformat:2|intcomma }}</h6>
+                                </div>
+                          
+                                <div class="hr-line mb-16"></div>
+                                <div class="d-flex align-items-center justify-content-between mb-16">
+                                    <h5 class="color-primary">TOTAL</h5>
+                                    <h5 class="color-primary">€{{ total_with_shipping|floatformat:2|intcomma }}</h5>
+                                </div>
+                                <div class="hr-line mb-16"></div>
+                          
+                                <div class="col-md-12">
+                                    <div class="cus-checkBox mb-32">
+                                        <input type="checkbox" id="terms">
+                                        <label for="terms">I have read and agree to the website terms and conditions</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="cus-btn active-btn order-submit " id="place-order-btn">Proceed to Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Billing Details End -->
+
+            <!-- Benefits Start -->
+            <footer>
+                <div class="container-fluid">
+                    <div class="benefits">
+                        <div class="row justify-content-center  benefits-wrapper">
+                            <div class="col-xxl-10 col-xl-12">
+                                <div class="row row-gap-3">
+                                    <div class="col-xl-2 col-md-4 col-6">
+                                        <div class="benefit-block">
+                                            <div class="image-box mb-12">
+                                                <img src="{% static 'assets/media/icons/icon-1-sm.png' %}" alt="">
+                                            </div>
+                                            <div class="content-box">
+                                                <p class="fw-500 mb-4p">Easy Exchanges</p>
+                                                <p class="light-gray">Get the perfect sound</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-md-4 col-6">
+                                        <div class="benefit-block">
+                                            <div class="image-box mb-12">
+                                                <img src="{% static 'assets/media/icons/icon-2-sm.png' %}" alt="">
+                                            </div>
+                                            <div class="content-box">
+                                                <p class="fw-500 mb-4p">Rapid Delivery</p>
+                                                <p class="light-gray">Hear your new gear sooner</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-md-4 col-6">
+                                        <div class="benefit-block">
+                                            <div class="image-box mb-12">
+                                                <img src="{% static 'assets/media/icons/icon-3-sm.png' %}" alt="">
+                                            </div>
+                                            <div class="content-box">
+                                                <p class="fw-500 mb-4p">Guaranteed Security</p>
+                                                <p class="light-gray">Shop with confidence</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-md-4 col-6">
+                                        <div class="benefit-block">
+                                            <div class="image-box mb-12">
+                                                <img src="{% static 'assets/media/icons/icon-4-sm.png' %}" alt="">
+                                            </div>
+                                            <div class="content-box">
+                                                <p class="fw-500 mb-4p">Savings Online</p>
+                                                <p class="light-gray">Unlock exclusive deals</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-md-4 col-6">
+                                        <div class="benefit-block">
+                                            <div class="image-box mb-12">
+                                                <img src="{% static 'assets/media/icons/icon-5-sm.png' %}" alt="">
+                                            </div>
+                                            <div class="content-box">
+                                                <p class="fw-500 mb-4p">Dedicated Support</p>
+                                                <p class="light-gray">24/7 customer support</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-md-4 col-6">
+                                        <div class="benefit-block">
+                                            <div class="image-box mb-12">
+                                                <img src="{% static 'assets/media/icons/icon-6-sm.png' %}" alt="">
+                                            </div>
+                                            <div class="content-box">
+                                                <p class="fw-500 mb-4p">Diverse Audio Brands</p>
+                                                <p class="light-gray">Explore top manufacturers</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="footer-wrapper pt-40 mb-32">
+                        <div class="store-desc">
+                            <a href="{% url 'home' %} "><img src="{% static 'assets/media/logo.png' %}" alt="" class="mb-16"></a>
+                            <p class="light-gray mb-xl-32 mb-lg-0 mb-32">
+                                Region Siciliana provides a convenient online shopping experience for premium audio devices. We are committed to offering quality products, secure transactions, and reliable delivery to bring the best sound directly to you.
+                            </p>
+                            <p class="d-xl-none d-lg-block d-none light-gray mb-32">
+                                Shop top-quality audio online with ease and confidence at Region Siciliana.
+                            </p>
+                            <a href="tel:123456789" class="d-flex align-items-center gap-3">
+                                <div class="icon-box">
+                                    <img src="{% static 'assets/media/icons/user-icon.png' %}" alt="">
+                                </div>
+                                <div>
+                                    <p class="light-gray mb-4p">
+                                        Call us 24/7
+                                    </p>
+                                    <h5 class="color-primary">+393511332891</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="footer-link-block">
+                            <h6 class="fw-600 mb-24">Categories</h6>
+                            <ul class="list-unstyled m-0">
+                                <li class="mb-8"><a href="{% url 'product_by_category' 'Amplifiers' %}" class="light-gray">Amplifiers</a></li>
+                                <li class="mb-8"><a href="{% url 'product_by_category' 'Digital' %}" class="light-gray">Digital</a></li>
+                                <li class="mb-8"><a href="{% url 'product_by_category' 'Loudspeakers' %}" class="light-gray">Loudspeakers</a></li>
+                                <li class="mb-8"><a href="{% url 'product_by_category' 'Mixer Console' %}" class="light-gray">Mixer Console</a></li>
+                                <li class="mb-8"><a href="{% url 'product_by_category' 'Turntables' %}" class="light-gray">Turntables</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-link-block">
+                            <h6 class="fw-600 mb-24">information</h6>
+                            <ul class="list-unstyled m-0">
+                                <li class="mb-8"><a href="{{ about_url }}" class="light-gray">About Us</a></li>
+                                <li class="mb-8"><a href="{{ refund_url }}" class="light-gray">Refund Policy</a></li>
+                                <li class="mb-8"><a href="{% url 'product_by_category' 'Digital' %}" class="light-gray">Electronic store</a></li>
+                                <li class="mb-8"><a href="{{ contact_url }}" class="light-gray">Contact</a></li>
+                                <li class="mb-8"><a href="{{ terms_url }}" class="light-gray">Terms & Conditions</a></li>
+                        </div>
+                        <div class="footer-link-block">
+                            <h6 class="fw-600 mb-24">Customer Care</h6>
+                            <ul class="list-unstyled m-0">
+                                <li class="mb-8"><a href="{% url 'authenticate' %}" class="light-gray">My Account</a></li>
+                                <li class="mb-8"><a href="{{ about_url }}" class="light-gray">FAQs</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-link-block">
+                            <ul class="list-unstyled mb-16">
+                                <li class="mb-12 footer-link">
+                                    <a href="" class="d-flex align-items-center gap-2">
+                                        <div class="img-box">
+                                            <img src="{% static 'assets/media/icons/location.png' %}" alt="">
+                                        </div>
+                                        <p class="light-gray" style="font-size: 12px; line-height: 1.4;">
+                                            REGIONE SICILIANA<br>
+                                            PIAZZA INDIPENDENZA 21<br>
+                                            90129 PALERMO ITALY<br><br>
+                                            VAT NO.02711070827
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="mb-12 footer-link">
+                                    <a href="mailto:info@example.com" class="d-flex align-items-center gap-2">
+                                        <div class="img-box">
+                                            <img src="{% static 'assets/media/icons/mail-sm.png' %}" alt="">
+                                        </div>
+                                        <p class="color-primary">info@regionesicilianait.com</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="fw-500 mb-16">Follow Us!</p>
+                            <ul class="list-unstyled social-link"> 
+                                <li>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                            <path
+                                                d="M12.5696 24.5995C12.4901 24.5995 12.4106 24.5995 12.3306 24.5992C10.4494 24.6038 8.71118 24.556 7.02075 24.4531C5.47095 24.3588 4.05627 23.8232 2.92944 22.9043C1.84216 22.0178 1.09967 20.819 0.722656 19.3417C0.394531 18.0555 0.377136 16.793 0.360474 15.5719C0.348389 14.6957 0.335937 13.6575 0.333374 12.6017C0.335937 11.5416 0.348389 10.5033 0.360474 9.62719C0.377136 8.40624 0.394531 7.14373 0.722656 5.85742C1.09967 4.38012 1.84216 3.18133 2.92944 2.29473C4.05627 1.37591 5.47095 0.840326 7.02093 0.746026C8.71136 0.643304 10.4499 0.595331 12.3352 0.599908C14.217 0.59588 15.9546 0.643304 17.6451 0.746026C19.1949 0.840326 20.6096 1.37591 21.7364 2.29473C22.8238 3.18133 23.5662 4.38012 23.9432 5.85742C24.2713 7.14355 24.2887 8.40624 24.3054 9.62719C24.3174 10.5033 24.3301 11.5416 24.3325 12.5973V12.6017C24.3301 13.6575 24.3174 14.6957 24.3054 15.5719C24.2887 16.7928 24.2715 18.0553 23.9432 19.3417C23.5662 20.819 22.8238 22.0178 21.7364 22.9043C20.6096 23.8232 19.1949 24.3588 17.6451 24.4531C16.0262 24.5516 14.3633 24.5995 12.5696 24.5995ZM12.3306 23.1127C14.1813 23.1171 15.8805 23.0702 17.5312 22.9699C18.7031 22.8987 20.0854 22.13 20.9178 21.4512C21.6872 20.8237 22.2171 19.958 22.4927 18.878C22.7658 17.8074 22.7816 16.6579 22.7968 15.5463C22.8087 14.676 22.8211 13.6451 22.8237 12.5995C22.8211 11.5538 22.8087 10.5231 22.7968 9.65282C22.7816 8.54119 22.7658 7.39166 22.4927 6.32086C22.2171 5.2409 21.6872 4.37518 20.9178 3.74767C20.0854 3.06909 18.7031 2.32292 17.5312 2.2517C15.8805 2.15117 14.1813 2.10485 12.335 2.10887C10.4847 2.10448 8.78534 2.15667 7.13464 2.2572C5.96277 2.32843 4.70864 2.83101 3.87624 3.50959C3.10683 4.1371 2.43443 5.2409 2.15885 6.32086C1.88566 7.39166 1.86991 8.54101 1.85472 9.65282C1.84281 10.5239 1.83036 11.5553 1.8278 12.6017C1.83036 13.6436 1.84281 14.6752 1.85472 15.5463C1.86991 16.6579 1.88566 17.8074 2.15885 18.878C2.43443 19.958 2.96434 20.8237 3.73374 21.4512C4.56614 22.1298 5.96277 22.8987 7.13464 22.9699C8.78534 23.0704 10.4851 23.1173 12.3306 23.1127ZM12.2859 18.4589C9.05523 18.4589 6.42657 15.8304 6.42657 12.5995C6.42657 9.36864 9.05523 6.74017 12.2859 6.74017C15.5168 6.74017 18.1453 9.36864 18.1453 12.5995C18.1453 15.8304 15.5168 18.4589 12.2859 18.4589ZM12.335 8.1045C9.70055 8.1045 7.84651 9.95854 7.84651 12.5973C7.84651 14.7942 9.50773 17.1126 12.3091 17.1126C14.5062 17.1126 16.7904 15.0312 16.7904 12.5973C16.7904 10.4004 15.1143 8.1045 12.335 8.1045ZM18.8016 4.86517C18.025 4.86517 17.3953 5.49468 17.3953 6.27142C17.3953 7.04815 18.025 7.67767 18.8016 7.67767C19.5783 7.67767 20.2078 7.04815 20.2078 6.27142C20.2078 5.49468 19.5783 4.86517 18.8016 4.86517Z"
+                                                fill="#0C0C0D" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                            <g clip-path="url(#clip0_5950_10656)">
+                                                <path
+                                                    d="M17.9584 6.22461C18.3465 6.22461 18.6615 5.90961 18.6615 5.52148V1.30273C18.6615 0.914609 18.3465 0.599609 17.9584 0.599609H13.7396C11.0256 0.599609 8.81775 2.80742 8.81775 5.52148V9.03711H6.70837C6.32025 9.03711 6.00525 9.35211 6.00525 9.74023V13.959C6.00525 14.3471 6.32025 14.6621 6.70837 14.6621H8.81775V23.8965C8.81775 24.2846 9.13275 24.5996 9.52087 24.5996H13.7396C14.1277 24.5996 14.4427 24.2846 14.4427 23.8965V14.6621H17.2552C17.5988 14.6621 17.8923 14.4137 17.949 14.0748L18.6521 9.85602C18.6859 9.65211 18.6287 9.44352 18.4951 9.28555C18.3615 9.12805 18.1651 9.03711 17.9584 9.03711H14.4427V6.22461H17.9584ZM13.7396 10.4434H17.1282L16.6595 13.2559H13.7396C13.3515 13.2559 13.0365 13.5709 13.0365 13.959V23.1934H10.224V13.959C10.224 13.5709 9.909 13.2559 9.52087 13.2559H7.4115V10.4434H9.52087C9.909 10.4434 10.224 10.1284 10.224 9.74023V5.52148C10.224 3.5832 11.8013 2.00586 13.7396 2.00586H17.2552V4.81836H13.7396C13.3515 4.81836 13.0365 5.13336 13.0365 5.52148V9.74023C13.0365 10.1284 13.3515 10.4434 13.7396 10.4434Z"
+                                                    fill="#0C0C0D" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_5950_10656">
+                                                    <rect width="24" height="24" fill="white" transform="translate(0.333374 0.599609)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                            <g clip-path="url(#clip0_5950_10659)">
+                                                <path
+                                                    d="M14.5746 10.762L23.3171 0.599609H21.2454L13.6543 9.42345L7.5914 0.599609H0.598511L9.76688 13.9428L0.598511 24.5996H2.6703L10.6866 15.2813L17.0896 24.5996H24.0825L14.5741 10.762H14.5746ZM11.737 14.0604L10.8081 12.7317L3.4168 2.15922H6.59895L12.5638 10.6915L13.4928 12.0202L21.2464 23.1109H18.0642L11.737 14.0609V14.0604Z"
+                                                    fill="#0C0C0D" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_5950_10659">
+                                                    <rect width="24" height="24" fill="white" transform="translate(0.333374 0.599609)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                            <g clip-path="url(#clip0_5950_10662)">
+                                                <path
+                                                    d="M5.97705 8.13074H1.45837C1.07001 8.13074 0.755249 8.44568 0.755249 8.83386V23.8965C0.755249 24.2849 1.07001 24.5996 1.45837 24.5996H5.97705C6.36542 24.5996 6.68018 24.2849 6.68018 23.8965V8.83386C6.68018 8.44568 6.36542 8.13074 5.97705 8.13074ZM5.27393 23.1934H2.1615V9.53699H5.27393V23.1934Z"
+                                                    fill="#0C0C0D" />
+                                                <path
+                                                    d="M3.7179 0.599609C2.08423 0.599609 0.755249 1.92859 0.755249 3.56189C0.755249 5.19556 2.08423 6.52435 3.7179 6.52435C5.35138 6.52435 6.68018 5.19537 6.68018 3.56189C6.68018 1.92859 5.35138 0.599609 3.7179 0.599609ZM3.7179 5.1181C2.85968 5.1181 2.1615 4.4201 2.1615 3.56189C2.1615 2.70386 2.85968 2.00586 3.7179 2.00586C4.57593 2.00586 5.27393 2.70386 5.27393 3.56189C5.27393 4.4201 4.57593 5.1181 3.7179 5.1181Z"
+                                                    fill="#0C0C0D" />
+                                                <path
+                                                    d="M17.2745 8.03131C16.2057 8.03131 15.1523 8.28894 14.2089 8.77087C14.1769 8.41217 13.8757 8.13074 13.5085 8.13074H8.9895C8.60132 8.13074 8.28638 8.44568 8.28638 8.83386V23.8965C8.28638 24.2849 8.60132 24.5996 8.9895 24.5996H13.5085C13.8969 24.5996 14.2117 24.2849 14.2117 23.8965V15.6121C14.2117 14.5464 15.0789 13.6794 16.1445 13.6794C17.2102 13.6794 18.077 14.5464 18.077 15.6121V23.8965C18.077 24.2849 18.392 24.5996 18.7802 24.5996H23.299C23.6874 24.5996 24.0021 24.2849 24.0021 23.8965V14.759C24.0021 11.0493 20.9842 8.03131 17.2745 8.03131ZM22.5959 23.1934H19.4835V15.6121C19.4835 13.7709 17.9857 12.2731 16.1447 12.2731C14.3034 12.2731 12.8054 13.7709 12.8054 15.6121V23.1934H9.69281V9.53699H12.8054V10.0565C12.8054 10.3269 12.9605 10.5734 13.2044 10.6904C13.4481 10.8074 13.7374 10.774 13.9485 10.605C14.9007 9.84131 16.051 9.43756 17.2745 9.43756C20.2087 9.43756 22.5959 11.8247 22.5959 14.759V23.1934Z"
+                                                    fill="#0C0C0D" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_5950_10662">
+                                                    <rect width="24" height="24" fill="white" transform="translate(0.333374 0.599609)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="footer-bottom-bar py-24">
+                        <p class="light-gray text-sm-left text-center">copyright2025@<a href="" class="color-primary">regionesicilianait.com</a></p>
+                        <div class="payment-cards d-flex align-items-center gap-16">
+                            <p class="fw-500 light-gray d-sm-flex d-none">Payment Mathods:</p>
+                            <div class="card-block">
+                                <img src="{% static 'assets/media/icons/card-1.png' %}" alt="">
+                            </div>
+                            <div class="card-block">
+                                <img src="{% static 'assets/media/icons/card-2.png' %}" alt="">
+                            </div>
+                            <div class="card-block">
+                                <img src="{% static 'assets/media/icons/card-3.png' %}" alt="">
+                            </div>
+                            <div class="card-block">
+                                <img src="{% static 'assets/media/icons/card-4.png' %}" alt="">
+                            </div>
+                            <div class="card-block">
+                                <img src="{% static 'assets/media/icons/card-5.png' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Benefits End -->
+       
+        </main>
+        <!-- Main Sections -->
+    </div>
+    <!-- Main Wrapper End -->
+
+    <!-- Back To Top Start -->
+    <a href="#main-wrapper" id="backto-top" class="back-to-top"><i class="fas fa-angle-up"></i></a>
+
+
+    <!-- Mobile Menu Start -->
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+            <div class="logo-box">
+                <a href="{% url 'home' %} " aria-label="logo image"><img src="{% static 'assets/media/mobile-logo.png' %}" alt=""></a>
+            </div>
+            <div class="mobile-nav__container"></div>
+            <ul class="mobile-nav__contact list-unstyled">
+                                     <li>
+  <a href="{% url 'cart' %}"
+     class="{% if request.path == request.build_absolute_uri|cut:request.get_host %}{% url 'cart' %}active{% endif %}">
+      Shoping cart
+  </a>
+</li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:example@company.com">info@regionesicilianait.com
+</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:+393511332891">+393511332891</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu End -->
+
+
+    <style>
+    /* Full-screen overlay */
+    #loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none; /* hidden by default */
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+  
+    /* Gold-topped spinner */
+    .spinner {
+      border: 8px solid rgba(255, 255, 255, 0.2);
+      border-top: 8px solid green; /* Gold */
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      animation: spin 1s linear infinite;
+    }
+  
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+    
+<!-- Full-screen overlay with spinner -->
+<div id="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+  
+
+    <!-- Jquery Js -->
+    <script src="{% static 'assets/js/vendor/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/jquery-validator.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/picker.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/picker.date.js' %}"></script>
+    <script src="{% static 'assets/js/date.js' %}"></script>
+
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to fetch the cart count
+        function updateCartCount() {
+            fetch("{% url 'get_cart_count' %}")  // Replace 'get_cart_count' with your actual URL name
+                .then(response => response.json())
+                .then(data => {
+                    const cartCountElement = document.getElementById("cart-count1");
+                    if (cartCountElement) {
+                        cartCountElement.textContent = data.cart_count; // Update the cart count
+                    }
+                })
+                .catch(error => console.error("Error fetching cart count:", error));
+        }
+
+        // Call updateCartCount on page load
+        updateCartCount();
+
+        // Optionally, re-fetch cart count at intervals or trigger it on specific actions
+    });
+
+</script>
+
+     
+<meta name="csrf-token" content="{{ csrf_token }}">
+<script>
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const overlay = document.getElementById('loading-overlay'); // Your full-screen loading overlay
+
+    document.getElementById('place-order-btn').addEventListener('click', function () {
+        console.log('Proceed button clicked!');
+        const requiredFields = [
+            { id: 'location', name: 'Street Address' },
+            { id: 'city', name: 'Town / City' },
+            { id: 'region', name: 'Country / Region' }, // Assuming 'Country / Region' is your State/County equivalent
+            { id: 'zip', name: 'Postcode / ZIP' },
+            { id: 'e-mail', name: 'Email address' },
+            { id: 'phoneNumber', name: 'Phone Number' },
+        ];
+
+        let isValid = true;
+        let missingFields = [];
+
+        requiredFields.forEach((field) => {
+            const fieldValue = document.getElementById(field.id).value.trim();
+            if (!fieldValue) {
+                isValid = false;
+                missingFields.push(field.name);
+            }
+        });
+
+        if (!isValid) {
+            Swal.fire({
+                title: 'Incomplete Billing Details',
+                html: `
+                    <p>Please fill in the following required fields:</p>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        ${missingFields.map((field) => `<li style="margin-bottom: 5px;">- ${field}</li>`).join('')}
+                    </ul>
+                `,
+                icon: 'warning',
+                confirmButtonText: 'OK',
+            });
+            return;
+        }
+
+        const placeOrderBtn = document.getElementById('place-order-btn');
+        const originalBtnText = placeOrderBtn.innerHTML;
+
+        // Show inline spinner on button
+        placeOrderBtn.innerHTML = `
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Processing...
+        `;
+        placeOrderBtn.disabled = true;
+
+        // Show full-screen overlay with spinner
+        if (overlay) overlay.style.display = 'flex';  // Display the overlay
+
+        const billingDetails = {
+            street_address: document.getElementById('location').value.trim(),
+            apartment: document.getElementById('apartMent').value.trim(), // Corrected ID
+            city: document.getElementById('city').value.trim(),
+            state: document.getElementById('region').value.trim(), // Assuming 'region' is your state/county equivalent
+            postcode: document.getElementById('zip').value.trim(),
+            email: document.getElementById('e-mail').value.trim(),
+            phone: document.getElementById('phoneNumber').value.trim(),
+        };
+
+        const cartDetails = {
+            products: [
+                {% for item in cart_items %}
+                {
+                    id: "{{ item.product.id }}",
+                    name: "{{ item.product.name }}",
+                    quantity: "{{ item.quantity }}",
+                    price: "{{ item.product.price }}",
+                    image: "{{ item.product.image.url }}",
+                },
+                {% endfor %}
+            ],
+            shipping_fee: "{{ shipping_fee }}",
+        };
+
+        const totalAmountToPay = {{ total_with_shipping|floatformat:2|default:0 }};
+        const formattedTotalAmount = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 2,
+        }).format(totalAmountToPay);
+
+        fetch("{% url 'get_bank_details' %}")
+            .then((response) => response.json())
+            .then((bankDetails) => {
+                if (overlay) overlay.style.display = 'none';  // Hide overlay when response is received
+
+                Swal.fire({
+                    title: "<h3 style='font-size: 18px; margin: 0;'>Bank Transfer Details</h3>",
+                    html: `
+                        <div style="font-size: 14px; text-align: center;">
+                            <p><strong>Bank Name:</strong> ${bankDetails.bank_name}</p>
+                            <p><strong>Branch:</strong> ${bankDetails.branch_name}</p>
+                            <p><strong>Account Number:</strong> ${bankDetails.account_number}</p>
+                            <p><strong>Account Holder:</strong> ${bankDetails.account_holder}</p>
+                            <p><strong>SWIFT Code:</strong> ${bankDetails.swift_code}</p>
+                            <hr>
+                            <p><strong>Total Amount to Pay:</strong> ${formattedTotalAmount}</p>
+                        </div>
+                    `,
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonText: "Confirm Transfer",
+                    cancelButtonText: "Cancel",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Show SweetAlert loading screen
+                        Swal.fire({
+                            title: 'Processing...',
+                            html: '<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                        });
+
+                        // Show full-screen overlay with spinner
+                        if (overlay) overlay.style.display = 'flex';  // Show the overlay
+
+                        fetch("{% url 'create_order' %}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": csrfToken,
+                            },
+                            body: JSON.stringify({
+                                billingDetails: billingDetails,
+                                cartDetails: cartDetails,
+                            }),
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (data.success) {
+                                    window.location.href = "{% url 'order_success' %}";
+                                } else {
+                                    Swal.fire("Error", "Something went wrong. Please try again.", "error");
+                                }
+                            })
+                            .catch(() => {
+                                Swal.fire("Error", "An unexpected error occurred.", "error");
+                            })
+                            .finally(() => {
+                                placeOrderBtn.innerHTML = originalBtnText;
+                                placeOrderBtn.disabled = false;
+                                if (overlay) overlay.style.display = 'none'; // Hide the overlay
+                            });
+                    } else {
+                        // If user cancels, restore button state
+                        placeOrderBtn.innerHTML = originalBtnText;
+                        placeOrderBtn.disabled = false;
+                        if (overlay) overlay.style.display = 'none'; // Hide the overlay
+                    }
+                });
+            })
+            .catch(() => {
+                Swal.fire("Error", "Failed to fetch bank details. Please try again later.", "error");
+                if (overlay) overlay.style.display = 'none'; // Hide the overlay
+                placeOrderBtn.innerHTML = originalBtnText;
+                placeOrderBtn.disabled = false;
+            });
+    });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+{% load static %}
+
+
+<!-- Header Menu Start -->
+  <header>
+    <div class="header-section">
+      
+        <div class="container-fluid">
+            <div class="header-center">
+                <a href="{% url 'home' %} " class="header-logo">
+                    <img src="{% static 'assets/media/logo.png' %}" alt="">
+                </a>
+                <div class="mixin-container d-xl-flex d-none">
+                    <div class="vr-line vr-line-2"></div>
+                                <form action="{% url 'product_search' %}" method="GET">
+    <div class="input-field">
+        <input type="text" name="search" id="searchInput2" class="form-control" placeholder="Search for products...">
+        <button type="submit" class="cus-btn">Search</button>
+    </div>
+</form>
+                </div>
+                <div class="header-buttons">
+                    <a class="button-block align-items-sm-unset align-items-end">
+                        <img src="{% static 'assets/media/users/user-3.png' %}" alt="" class="user">
+                        <div>
+                            {% if not user.is_authenticated %}
+                                <p><a href="{% url 'login_view' %}">Login</a></p>
+                            {% endif %}
+                            <h6>{{ request.user.username }}</h6>
+                        </div>
+                    </a>
+                    {% if not user.is_authenticated %}
+                     {% else %}
+                     <a href="{% url 'cart' %}" class="button-block d-sm-flex d-none cart-button">
+                           <i class="fa fa-shopping-cart"></i>
+                                <div class="qty cart-count"  id="cart-count1">0</div>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mixin-container d-xl-none d-flex">
+
+                <div class="vr-line vr-line-2"></div>
+             <form action="{% url 'product_search' %}" method="GET">
+    <div class="input-field">
+        <input type="text" name="search" id="searchInput2" class="form-control" placeholder="Search for products...">
+        <button type="submit" class="cus-btn">Search</button>
+    </div>
+</form>
+
+            </div>
+            
+            <div class="header-bottom-area">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <!-- Categories Dropdown -->
+                    <div class="nav-container">
+                        <nav class="all-category-nav">
+                            <label class="open-menu-all" for="open-menu-all">
+                                <input class="input-menu-all" id="open-menu-all" type="checkbox" name="menu-open">
+                                <span class="all-navigator"><i class="fas fa-bars" aria-hidden="true"></i> <span>Browse All Categories</span>
+                                </span>
+                               <span class="all-category-list list-unstyled">
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Amplifiers' %}" class="all-category-list-link dark-black fw-500">Amplifiers</a>
+                                </span>
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Digital' %}" class="all-category-list-link dark-black fw-500">Digital</a>
+                                </span>
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Loudspeakers' %}" class="all-category-list-link dark-black fw-500">Loudspeakers</a>
+                                </span>
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Mixer Console' %}" class="all-category-list-link dark-black fw-500">Mixer Console</a>
+                                </span>
+                                <span class="all-category-list-item">
+                                    <a href="{% url 'product_by_category' 'Turntables' %}" class="all-category-list-link dark-black fw-500">Turntables</a>
+                                </span>
+                            </span>
+
+                            </label>
+                        </nav>
+                    </div>
+                    <!-- Categories Dropdown -->
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                          <ul class="main-menu__list">
+                            <li>
+                                <a href="{{ home_url }}"
+                                class="{% if request.path == home_url %}active{% endif %}">
+                                    Home Page
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ about_url }}"
+                                class="{% if request.path == about_url %}active{% endif %}">
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ refund_url }}"
+                                class="{% if request.path == refund_url %}active{% endif %}">
+                                    Refund Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ terms_url }}"
+                                class="{% if request.path == terms_url %}active{% endif %}">
+                                    Terms & Conditions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ contact_url }}"
+                                class="{% if request.path == contact_url %}active{% endif %}">
+                                    Contact Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ orders_url }}"
+                                class="{% if request.path == orders_url %}active{% endif %}">
+                                    Orders
+                                </a>
+                            </li>
+                        </ul>
+
+                        </div>
+                    </div>
+                    <div class="main-menu__right">
+                        <div class="d-sm-flex d-none gap-2">
+                        </div>
+                        <a href="#" class="main-menu__toggler mobile-nav__toggler">
+                            <img src="{% static 'assets/media/icons/menu-2.png' %}" alt="">
+                            Menu
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header Menu End -->
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to fetch the cart count
+        function updateCartCount() {
+            fetch("{% url 'get_cart_count' %}")  // Replace 'get_cart_count' with your actual URL name
+                .then(response => response.json())
+                .then(data => {
+                    const cartCountElement = document.getElementById("cart-count1");
+                    if (cartCountElement) {
+                        cartCountElement.textContent = data.cart_count; // Update the cart count
+                    }
+                })
+                .catch(error => console.error("Error fetching cart count:", error));
+        }
+
+        // Call updateCartCount on page load
+        updateCartCount();
+
+        // Optionally, re-fetch cart count at intervals or trigger it on specific actions
+    });
+
+</script>
+
+
+

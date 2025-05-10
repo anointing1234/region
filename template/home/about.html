@@ -1,0 +1,287 @@
+{% extends "../core/base/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block contents %}
+
+        <!-- Main Sections -->
+        <main class="main-wrapper bg-lightest-gray">
+
+            <!-- Title Banner Start -->
+            <section class="title-banner">
+                <div class="container-fluid">
+                    <div class="banner-wrapper">
+                        <img src="{% static 'assets/media/banner/left-image.png' %}" alt="" class="banner-image1">
+                        <h1 class="dark-black fw-600">About Us</h1>
+                        <img src="{% static 'assets/media/banner/right-image.png' %}" alt="" class="banner-image2">
+                    </div>
+                </div>
+            </section>
+            <!-- Title Banner End -->
+<!-- About Section Start -->
+<section class="about-section py-40">
+    <div class="container-fluid">
+        <div class="about-wrapper bg-white">
+            <div class="about-block mb-24">
+                <div class="row align-items-center row-gap-4">
+                    <div class="col-xl-6 col-lg-7 order-sm-1 order-2">
+                        <div class="about-content">
+                            <h3 class="mb-24">Discover Our Story</h3>
+                            <p class="light-gray mb-12">
+                                Welcome to <span class="dark-black fw-500">Region Siciliana – Your Audio Destination | Speakers & More.</span>  
+                                We're your go-to destination for top-quality audio accessories and tech gear.  
+                                From speakers and headphones to cables and beyond, we’re here to keep you connected  
+                                with products that deliver performance, style, and value.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-5 order-sm-2 order-1">
+                        <div class="about-image">
+                            <img src="{% static 'assets/media/about/about-1.png' %}"
+                                 alt="About Region Siciliana"
+                                 class="br-20">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-block mb-24">
+                <div class="row align-items-center row-gap-4">
+                    <div class="col-xl-6 col-lg-5">
+                        <div class="about-image">
+                            <img src="{% static 'assets/media/about/about-2.webp' %}"
+                                 alt="Our Mission at Region Siciliana"
+                                 class="br-20">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-7">
+                        <div class="about-content">
+                            <h3 class="mb-24">Our Mission and Values</h3>
+                            <p class="light-gray mb-24">
+                                At <span class="dark-black fw-500">Region Siciliana – Your Audio Destination | Speakers & More,</span>  
+                                our mission is to enhance everyday audio experiences through high-quality, affordable  
+                                sound products. From premium speakers to essential accessories, we’re committed to  
+                                delivering exceptional value with every purchase.
+                            </p>
+                            <ul>
+                                <li class="fw-500 mb-8">Premium Quality</li>
+                                <li class="fw-500 mb-8">Fair Pricing</li>
+                                <li class="fw-500 mb-8">Customer-Centric Service</li>
+                                <li class="fw-500 mb-8">Cutting-Edge Innovation</li>
+                                <li class="fw-500">Sustainable Practices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- About Section End -->
+
+<!-- Why Choose Us -->
+<section class="whyChoose-us py-40">
+    <div class="container-fluid">
+        <div class="title-row text-center mb-16">
+            <h5>Why Choose Region Siciliana</h5>
+        </div>
+        <div class="row row-gap-3">
+            <div class="col-xl-3 col-lg-6 col-sm-6">
+                <div class="our-block bg-white br-10 text-center">
+                    <div class="icon-block m-auto">
+                        <img src="{% static 'assets/media/icons/quality.png' %}" alt="Premium Audio Quality">
+                    </div>
+                    <h6 class="mt-24 mb-16 fw-600">Premium Audio Quality</h6>
+                    <p class="light-gray">
+                        Every speaker and accessory is hand-picked to deliver crystal-clear sound and robust bass for an immersive listening experience.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-sm-6">
+                <div class="our-block bg-white br-10 text-center">
+                    <div class="icon-block m-auto">
+                        <img src="{% static 'assets/media/icons/customer.png' %}" alt="Expert Customer Support">
+                    </div>
+                    <h6 class="mt-24 mb-16 fw-600">Expert Customer Support</h6>
+                    <p class="light-gray">
+                        Our audio specialists are here to help you choose the perfect gear, answer your questions, and ensure you’re 100% satisfied.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-sm-6">
+                <div class="our-block bg-white br-10 text-center">
+                    <div class="icon-block m-auto">
+                        <img src="{% static 'assets/media/icons/wishlist-icon.png' %}" alt="Secure & Easy Checkout">
+                    </div>
+                    <h6 class="mt-24 mb-16 fw-600">Secure & Easy Checkout</h6>
+                    <p class="light-gray">
+                        Shop with confidence—our encrypted payment gateway and streamlined process make buying your favorite audio gear quick and safe.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-sm-6">
+                <div class="our-block bg-white br-10 text-center">
+                    <div class="icon-block m-auto">
+                        <img src="{% static 'assets/media/icons/cheque.png' %}" alt="Best Prices & Deals">
+                    </div>
+                    <h6 class="mt-24 mb-16 fw-600">Best Prices & Deals</h6>
+                    <p class="light-gray">
+                        We negotiate directly with top brands to bring you competitive pricing and exclusive offers on all your favorite audio products.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Why Choose Us -->
+
+
+           <!-- FAQ's Section Start -->
+<div class="faq py-40">
+    <div class="container-fluid">
+        <div class="title-row mb-16 text-center">
+            <h5>Frequently Asked Questions</h5>
+        </div>
+        <div class="row row-gap-3">
+            <div class="col-xl-6 col-lg-12">
+                <div id="accordionExample">
+                    <div class="faq-block">
+                        <a href="#" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true"
+                           aria-controls="faq1">
+                            What is your return and exchange policy?
+                        </a>
+                        <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="faq1"
+                             data-bs-parent="#accordionExample">
+                            <p class="light-gray">
+                                We offer a 30-day return and exchange policy on all audio products. If you’re not satisfied, simply return
+                                your item in original condition and packaging within 30 days for a full refund or exchange.  
+                                See our <span class="color-primary">Return Policy</span> page for details.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="faq-block">
+                        <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2"
+                           aria-expanded="false" aria-controls="faq2">
+                            How can I track my order?
+                        </a>
+                        <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2"
+                             data-bs-parent="#accordionExample">
+                            <p class="light-gray">
+                                Once your order ships, we’ll send you a tracking link via email. You can also view your order status in
+                                your account under “My Orders.”  
+                                For any issues, reach out to us via <span class="color-primary">Customer Support</span>.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="faq-block m-0">
+                        <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq3"
+                           aria-expanded="false" aria-controls="faq3">
+                            How do I contact your support team?
+                        </a>
+                        <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3"
+                             data-bs-parent="#accordionExample">
+                            <p class="light-gray">
+                                Our audio specialists are available Monday–Friday, 9 AM–6 PM CET.  
+                                Email us at <span class="color-primary">support@regionsiciliana.com</span> or use the live chat widget
+                                at the bottom right of the page.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12">
+                <div id="accordionExample_2">
+                    <div class="faq-block">
+                        <a href="#" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="true"
+                           aria-controls="faq5">
+                            Do you offer international shipping?
+                        </a>
+                        <div id="faq5" class="accordion-collapse collapse show" aria-labelledby="faq5"
+                             data-bs-parent="#accordionExample_2">
+                            <p class="light-gray">
+                                Yes! We ship to most countries worldwide. Shipping rates and delivery times depend on your location and
+                                selected carrier. You can review all options and costs during checkout or on our  
+                                <span class="color-primary">Shipping Information</span> page.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="faq-block">
+                        <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq6"
+                           aria-expanded="false" aria-controls="faq6">
+                            What payment methods do you accept?
+                        </a>
+                        <div id="faq6" class="accordion-collapse collapse" aria-labelledby="faq6"
+                             data-bs-parent="#accordionExample_2">
+                            <p class="light-gray">
+                                We accept major credit/debit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay. All
+                                transactions are secured with industry-standard encryption.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="faq-block m-0">
+                        <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq7"
+                           aria-expanded="false" aria-controls="faq7">
+                            How do I apply a discount or promo code?
+                        </a>
+                        <div id="faq7" class="accordion-collapse collapse" aria-labelledby="faq7"
+                             data-bs-parent="#accordionExample_2">
+                            <p class="light-gray">
+                                During checkout, enter your code in the “Promo Code” field and click “Apply.” Your total will update
+                                to reflect the discount. Only one code can be used per order.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQ's Section End -->
+
+        </main>
+        <!-- Main Sections -->
+    </div>
+    <!-- Main Wrapper End -->
+
+    <!-- Back To Top Start -->
+    <a href="#main-wrapper" id="backto-top" class="back-to-top"><i class="fas fa-angle-up"></i></a>
+
+  
+
+    <!-- Mobile Menu Start -->
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+            <div class="logo-box">
+                <a href="{% url 'home' %} " aria-label="logo image"><img src="{% static 'assets/media/mobile-logo.png' %}" alt=""></a>
+            </div>
+            <div class="mobile-nav__container"></div>
+            <ul class="mobile-nav__contact list-unstyled">
+                                     <li>
+  <a href="{% url 'cart' %}"
+     class="{% if request.path == request.build_absolute_uri|cut:request.get_host %}{% url 'cart' %}active{% endif %}">
+      Shoping cart
+  </a>
+</li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:example@company.com">info@regionesicilianait.com
+</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:+393511332891">+393511332891</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu End -->
+
+  {% endblock contents %}   

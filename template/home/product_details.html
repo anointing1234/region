@@ -1,0 +1,441 @@
+{% extends "../core/base/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block contents %}
+
+        <!-- Main Sections -->
+        <main class="main-wrapper bg-lightest-gray">
+            <!-- Shop Detail Start -->
+            <section class="shop-detail py-40">
+                <div class="container-fluid">
+                    <div class="detail-wrapper">
+                        <div class="row row-gap-3">
+                            <div class="col-xl-6">
+                                <div class="product-image-container bg-white">
+                                    <div class="product-slider">
+                                        <div class="detail-image">
+                                            <img src="{{ product.resized_image  }}" alt="{{ product.name }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="product-text-container bg-white br-20">
+                                    <h3 class="fw-700 mb-16">{{ product.name }}</h3>
+                                    <div class="d-flex align-items-center flex-wrap gap-16 mb-24">
+                                        {% if product.rating %}
+                                        {% for i in "12345" %}
+                                          {% if forloop.counter <= product.rating|floatformat:0 %}
+                                            ★
+                                          {% else %}
+                                            <span class="light-gray">★</span>
+                                          {% endif %}
+                                        {% endfor %}
+                                        &nbsp;&nbsp;
+                                        <span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+                                      {% else %}
+                                        <span class="light-gray">★★★★★</span>
+                                        &nbsp;&nbsp;
+                                        <span class="text-16 fw-400 dark-black">(0)</span>
+                                      {% endif %}
+                                    
+                                       
+                                    </div>
+                                    <div class="d-flex align-items-center gap-16 mb-24">
+                                        {% comment %} <p class="light-gray text-decoration-line-through">€450.00</p> {% endcomment %}
+                                        <h5>€{{ product.price|floatformat:2|intcomma }}</h5>
+                                    
+                                    </div>
+                                    <p class="light-gray mb-24">
+                                        {{ product.description }}
+                                    </p>
+                                   
+                                    <div class="hr-line mb-24"></div>
+                                    <div class="function-bar mb-16">
+                                        <div class="cart-btn w-100">
+                                            <button data-product-id="{{ product.id }}"
+                                      data-add-to-cart-url="{% url 'add_to_cart' product.id %}"
+                                      data-csrf-token="{{ csrf_token }}" class="cus-btn-2 w-100 add-to-cart-btn"><span class="btn-text">ADD TO CART</span>
+                                          <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                
+                                    </button>
+                                        </div>
+                                      
+                                    </div>
+                                    <a href="checkout.html" class="cus-btn-3 w-100 mb-24">Buy Now</a>
+                                    <div class="hr-line mb-24"></div>
+                                    <div class="d-flex align-items-center gap-16 mb-16">
+                                        <h6>Category:</h6>
+                                        <p class="light-gray"> <span class="color-primary">{{ product.product_category }}</p>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-16 mb-16">
+                                        <h6>Quantity:</h6>
+                                        <p class="light-gray"> <span class="color-primary">{{ product.quantity }}</p>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Shop Detail End -->
+        
+            <!-- Product Description Start -->
+            <section class="product-description pb-40">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="description-wrapper bg-white br-20">
+                            <nav class="mb-32">
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active " id="nav-desc-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-desc" type="button" role="tab" aria-controls="nav-desc"
+                                        aria-selected="true">Description</button>
+        
+        
+                                    <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review"
+                                        aria-selected="false">Reviews ({{ product.reviews.count  }})</button>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade active show " id="nav-desc" role="tabpanel"
+                                    aria-labelledby="nav-desc-tab">
+                                    <h5 class="mb-24">Product Supreme Quality</h5>
+                                    <p class="light-gray mb-16">
+                                        {{ product.description }}
+                                    </p>
+                                   
+                                </div>
+                                
+                                <div class="tab-pane fade show " id="nav-review" role="tabpanel"
+                                    aria-labelledby="nav-review-tab">
+                                    <div class="comments-sec mb-48">
+                                        <h5 class="mb-48">({{ product.reviews.count }}) customer Reviews</h5>
+                                        {% for review in reviews %}
+                                        <div class="comment-box mb-24">
+                                            <img style="width: 70px;" src="{% static 'assets/media/users/user-4.png' %}" alt="" class="br-5">
+                                            <div class="block">
+                                                <div class="top-row mb-16">
+                                                    <div class="info">
+                                                        <h5 class="light-black">{{ review.name }}</h5>
+                                                        <p class="date">{{ review.created_at|date:"d M, Y" }}</p>
+                                                    </div>
+                                                    <h5 class="color-sec">
+                                                        {% for i in "12345" %}
+                                                            {% if forloop.counter <= review.stars|floatformat:0 %}
+                                                                ★
+                                                            {% else %}
+                                                                <span class="light-gray">★</span>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </h5>
+                                                </div>
+                                                <p class="light-gray">{{ review.content }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line mb-24"></div>
+                                        {% empty %}
+                                        <p class="text-muted">No reviews yet.</p>
+                                        {% endfor %}
+                                    </div>
+                                    
+
+
+                                    <div class="review-form">
+                                        <h5 class="fw-500 mb-8">Write a Review</h5>
+                                        <p class="light-gray mb-32">Your email address will not be published. Required fields
+                                            are marked.</p>
+        
+                                        <p class="mb-16 fw-500">Your Review</p>
+                                        <form id="review_form" method="post" class="form-group">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                              <div class="col-sm-12">
+                                                <div class="input-block mb-24">
+                                                  <textarea class="form-control" name="message" id="comment"
+                                                            rows="4" placeholder="Write Your Review here..." required></textarea>
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <div class="input-block mb-24">
+                                                  <input type="text" class="form-control" id="name" name="name"
+                                                         required placeholder="Your Name">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <div class="input-block mb-24">
+                                                  <input type="email" class="form-control" id="email" name="email"
+                                                         required placeholder="Your Email">
+                                                </div>
+                                              </div>
+                                              <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                                            </div>
+                                            <button type="submit" class="cus-btn-3 w-25">Submit</button>
+                                          </form>
+                                          
+                                       
+                                          
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+        
+                    </div>
+                </div>
+            </section>
+            <!-- Product Description End -->
+
+            <!-- Recommended Product Start -->
+            <section class="recommended-product bg-lightest-gray pb-40">
+                <div class="container-fluid">
+                    <div class="top-bar mb-16">
+                        <h5>Recommended Products</h5>
+                        <a href="shop-grid-sidebar-1.html" class="cus-btn-arrow"> Show All 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 20 15" fill="none">
+                                <path
+                                    d="M13.3545 14.7476C13.3545 11.7476 16.1545 7.74756 19.3545 7.74756M19.3545 7.74756C17.5212 7.74756 13.3545 6.74756 13.3545 0.747559M19.3545 7.74756H0.354492"
+                                    stroke="#0C0C0D" stroke-width="2" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="row row-gap-4">
+                        {% for product in related_products %}
+                        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+                            <div class="featured-product-card bg-white br-10">
+                                <div class="image-box mb-16">
+                                  <a href="{% url 'product_detail' product.pk %}">
+                                    <img
+                                      src="{{ product.resized_image }}"
+                                      alt="{{ product.name }}"
+                                      class="product-image"
+                                      width="348" height="328"
+                                    />
+                                  </a>
+                                </div>
+                                <div class="product-desc">
+                                  <h6 class="product-title mb-8 text-center">
+                                    <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+                                  </h6>
+                                  <div class="rating-star mb-16 bg-white">
+                                    <h5 class="color-sec mb-24 text-center">
+                                      {% if product.rating %}
+                                        {% for i in "12345" %}
+                                          {% if forloop.counter <= product.rating|floatformat:0 %}
+                                            ★
+                                          {% else %}
+                                            <span class="light-gray">★</span>
+                                          {% endif %}
+                                        {% endfor %}
+                                        &nbsp;&nbsp;
+                                        <span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+                                      {% else %}
+                                        <span class="light-gray">★★★★★</span>
+                                        &nbsp;&nbsp;
+                                        <span class="text-16 fw-400 dark-black">(0)</span>
+                                      {% endif %}
+                                    </h5>
+                                    <h6 class="text-center">
+                                      €{{ product.price|floatformat:2|intcomma }}
+                                    </h6>
+                                  </div>
+                                
+                                  <button  data-product-id="{{ product.id }}"
+                                      data-add-to-cart-url="{% url 'add_to_cart' product.id %}"
+                                      data-csrf-token="{{ csrf_token }}" class="cus-btn-2 w-100 add-to-cart-btn"><span class="btn-text">Add to Cart</span>
+                                                      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+                                </div>
+                              </div>
+                            </div>
+                          {% empty %}
+                            <div class="col-12">
+                              <div class="alert alert-info text-center br-10 py-4">
+                                No related products.
+                              </div>
+                            </div>
+                          {% endfor %}
+
+
+
+                    </div>
+                </div>
+            </section>
+            <!-- Recommended Product End -->
+        
+        </main>
+        <!-- Main Sections -->
+    </div>
+    <!-- Main Wrapper End -->
+
+    <!-- Back To Top Start -->
+    <a href="#main-wrapper" id="backto-top" class="back-to-top"><i class="fas fa-angle-up"></i></a>
+
+
+
+    <!-- Mobile Menu Start -->
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+            <div class="logo-box">
+                <a href="{% url 'home' %} " aria-label="logo image"><img src="{% static 'assets/media/mobile-logo.png' %}" alt=""></a>
+            </div>
+            <div class="mobile-nav__container"></div>
+            <ul class="mobile-nav__contact list-unstyled">
+                                     <li>
+  <a href="{% url 'cart' %}"
+     class="{% if request.path == request.build_absolute_uri|cut:request.get_host %}{% url 'cart' %}active{% endif %}">
+      Shoping cart
+  </a>
+</li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:example@company.com">info@regionesicilianait.com
+</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:+393511332891">+393511332891</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu End -->
+
+
+
+
+
+     
+<style>
+    /* Full-screen overlay */
+    #loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none; /* hidden by default */
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+  
+    /* Gold-topped spinner */
+    .spinner {
+      border: 8px solid rgba(255, 255, 255, 0.2);
+      border-top: 8px solidrgb(16, 67, 16); /* Gold */
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      animation: spin 1s linear infinite;
+    }
+  
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  
+
+  
+
+
+
+<!-- Full-screen overlay with spinner -->
+<div id="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+  
+  <!-- Toastify CSS & JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script>
+    (function(){
+      const form = document.getElementById('review_form');
+      const overlay = document.getElementById('loading-overlay');
+      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        overlay.style.display = 'flex';
+  
+        const data = {};
+        new FormData(form).forEach((v, k) => data[k] = v);
+  
+        const processingToast = Toastify({
+          text: 'Submitting your review...',
+          duration: 0,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          stopOnFocus: true
+        });
+        processingToast.showToast();
+  
+        try {
+          const response = await fetch("{% url 'submit_reviews'  %}", {  // change this URL to match your Django view
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify(data)
+          });
+  
+          const responseData = await response.json();
+          processingToast.hideToast();
+  
+          if (responseData.success) {
+            Toastify({
+              text: responseData.message || "Review submitted successfully!",
+              duration: 3000,
+              gravity: "top",
+              position: "right",
+              backgroundColor: "linear-gradient(to right, rgb(55, 212, 102), rgb(174, 171, 84))",
+              stopOnFocus: true
+            }).showToast();
+            form.reset();
+            
+                setTimeout(() => {
+                    location.reload();  // Reload after showing success toast
+                }, 3000);
+          } else {
+            Toastify({
+              text: responseData.message || "Failed to submit review.",
+              duration: 5000,
+              gravity: "top",
+              position: "right",
+              backgroundColor: "#dc3545",
+              stopOnFocus: true
+            }).showToast();
+          }
+        } catch (error) {
+          processingToast.hideToast();
+          Toastify({
+            text: 'An unexpected error occurred.',
+            duration: 5000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#dc3545",
+            stopOnFocus: true
+          }).showToast();
+        } finally {
+          overlay.style.display = 'none';
+        }
+      });
+    })();
+  </script>
+  
+
+
+    {% endblock contents %} 

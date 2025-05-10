@@ -1,0 +1,197 @@
+{% extends "../../core/base/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block contents %}
+
+             <!-- Title Banner Start -->
+             <section class="title-banner">
+                <div class="container-fluid">
+                    <div class="banner-wrapper">
+                        <img src="{% static 'assets/media/banner/left-image.png' %}" alt="" class="banner-image1">
+                        <h1 class="dark-black fw-600">Shop {{ category_name }}</h1>
+                        <img src="{% static 'assets/media/banner/right-image.png' %}" alt="" class="banner-image2">
+                    </div>
+                </div>
+            </section>
+            <!-- Title Banner End -->
+
+            <!-- Featured Product Start -->
+            <section class="featured-product-sec py-40 bg-lightest-gray">
+                <div class="container-fluid">
+                    <div class="shop-grid-topbar-container mb-16">
+                        <div class="shop-grid-topbar v-2 mb-12 p-0">
+                            <div class="first-block">
+                                <div class="visual-btns v-2">
+                                    <a href="javascript:;" class="visual-box shop-filter">
+                                        <img src="{% static 'assets/media/icons/filter-icon.png' %}" alt="">
+                                        <span>Filter</span>
+                                    </a>
+                                   
+                                </div>
+                              <div class="results d-xl-block d-none">
+                                <p class="dark-gray">Showing {{ start_index }} - {{ end_index }} of {{ total_products }} Results</p>
+                            </div>
+
+                            </div>
+                        </div>
+                     
+                        
+                    </div>
+                   <div class="row row-gap-3 row-cols-xxl-5 row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+{% for product in products %}
+    <div class="col d-flex">
+        <div class="featured-product-card bg-white br-10 d-flex flex-column w-100" style="min-height: 500px;">
+            <div class="image-box" style="height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                {% if product.discount %}
+                    <span class="sale-label" style="position: absolute; top: 10px; left: 10px;">-{{ product.discount }}%</span>
+                {% endif %}
+                <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" class="product-image" alt="{{ product.name }}" style="width: 200px; max-height: 100%; object-fit: contain;">
+                </a>
+            </div>
+            <div class="product-desc d-flex flex-column justify-content-between flex-grow-1 p-3">
+                <div>
+                    <h6 class="product-title mb-2">
+                        <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                    </h6>
+                    <p class="light-gray mb-3">{{ product.description|truncatewords:15 }}</p>
+                </div>
+                <div class="rating-star mb-3">
+                        {% if product.rating %}
+                                        {% for i in "12345" %}
+                                          {% if forloop.counter <= product.rating|floatformat:0 %}
+                                            ★
+                                          {% else %}
+                                            <span class="light-gray">★</span>
+                                          {% endif %}
+                                        {% endfor %}
+                                        &nbsp;&nbsp;
+                                        <span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+                                      {% else %}
+                                        <span class="light-gray">★★★★★</span>
+                                        &nbsp;&nbsp;
+                                        <span class="text-16 fw-400 dark-black">(0)</span>
+                                      {% endif %}
+                    <h6 class="m-0">
+                        {% if product.discount_price %}
+                            <span class="text-decoration-line-through light-gray">${{ product.price }}</span>&nbsp;&nbsp;${{ product.discount_price }}
+                        {% else %}
+                            ${{ product.price }}
+                        {% endif %}
+                    </h6>
+                </div>
+                      <button  data-product-id="{{ product.id }}"
+                                      data-add-to-cart-url="{% url 'add_to_cart' product.id %}"
+                                      data-csrf-token="{{ csrf_token }}" class="cus-btn-2 w-100 add-to-cart-btn mt-auto"><span class="btn-text">Add to Cart</span>
+                                                      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+{% empty %}
+    <p>No products found in {{ category_name }} category.</p>
+{% endfor %}
+
+</div>
+
+
+
+               <div class="pagination pt-40">
+    <ul id="border-pagination">
+        {% if products.has_previous %}
+            <li><a href="?page={{ products.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        {% for num in products.paginator.page_range %}
+            <li><a href="?page={{ num }}" class="{% if products.number == num %}active{% endif %}">{{ num }}</a></li>
+        {% endfor %}
+        {% if products.has_next %}
+            <li><a href="?page={{ products.next_page_number }}">Next</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+                </div>
+            </section>
+            <!-- Featured Product End -->
+
+        </main>
+        <!-- Main Sections -->
+    </div>
+    <!-- Main Wrapper End -->
+
+    <!-- Back To Top Start -->
+    <a href="#main-wrapper" id="backto-top" class="back-to-top"><i class="fas fa-angle-up"></i></a>
+
+  
+
+    <!-- Mobile Menu Start -->
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+            <div class="logo-box">
+                <a href="{% url 'home' %} " aria-label="logo image"><img src="{% static 'assets/media/mobile-logo.png' %}" alt=""></a>
+            </div>
+            <div class="mobile-nav__container"></div>
+            <ul class="mobile-nav__contact list-unstyled">
+                                     <li>
+  <a href="{% url 'cart' %}"
+     class="{% if request.path == request.build_absolute_uri|cut:request.get_host %}{% url 'cart' %}active{% endif %}">
+      Shoping cart
+  </a>
+</li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:example@company.com">info@regionesicilianait.com
+</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:+393511332891">+393511332891</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu End -->
+
+
+  <!-- Filter Sidebar -->
+<div class="sidebar toggle-sidebar bg-white">
+    <div class="category-block box-1 mb-24">
+        <div class="title mb-24" data-count="1">
+            <h6>Product Categories</h6>
+            <span>
+                <i class="far fa-horizontal-rule"></i>
+            </span>
+        </div>
+        <div class="content-block">
+            <ul class="list-unstyled">
+                <li class="mb-2">
+                    <a href="{% url 'product_by_category' 'Amplifiers' %}" class="all-category-list-link dark-black fw-500 d-block">Amplifiers</a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% url 'product_by_category' 'Digital' %}" class="all-category-list-link dark-black fw-500 d-block">Digital</a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% url 'product_by_category' 'Loudspeakers' %}" class="all-category-list-link dark-black fw-500 d-block">Loudspeakers</a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% url 'product_by_category' 'Mixer Console' %}" class="all-category-list-link dark-black fw-500 d-block">Mixer Console</a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% url 'product_by_category' 'Turntables' %}" class="all-category-list-link dark-black fw-500 d-block">Turntables</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <div class="overlay"></div>
+    <!-- Filter Sidebar -->
+
+    {% endblock contents %}  

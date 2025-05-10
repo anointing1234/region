@@ -1,0 +1,101 @@
+{% extends "../core/base/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block contents %}
+   
+
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div style="padding:20px;" class="row">
+            <h4 class="mb-2 mt-2">Refund & Exchange Policy</h4>
+            <p><span class="dark-black fw-500">Regione Siciliana – Your Audio Destination</span> offers you a risk-free shopping experience.  
+            If you receive a defective, damaged, or incorrect item, or change your mind, you may request an exchange or refund  
+            within fourteen (14) days of:</p>
+            <ul>
+                <li>The date of purchase in one of our physical stores (with proof of purchase).</li>
+                <li>The date you received the product for online orders placed at  
+                    <a href="https://regionesicilianait.com">regionesicilianait.com</a>.
+                </li>
+            </ul>
+            <p>The 14-day period applies to all audio equipment and accessories purchased from us.</p>
+
+            <h4 class="mb-2 mt-2">How to Initiate a Return or Exchange</h4>
+            <p>To take advantage of this policy, please:</p>
+            <ol>
+                <li>Log into your account at <a href="https://regionesicilianait.com">regionesicilianait.com</a> or contact the store where you purchased.</li>
+                <li>Within 14 days, submit your request via our <span class="color-primary">Returns & Exchanges</span> page or email <a href="mailto:support@regionesicilianait.com">support@regionesicilianait.com</a>.</li>
+                <li>Ship the product back (in original packaging, with all accessories) using a trackable carrier.</li>
+                <li>Once we receive and inspect the item, we’ll process your refund or ship a replacement within 14 days.</li>
+            </ol>
+
+            <h4 class="mb-2 mt-2">Return Requirements</h4>
+            <p>To qualify for a full refund or exchange, the item must be:</p>
+            <ul>
+                <li>Unused and in its original condition, including box, manuals, and all accessories.</li>
+                <li>Returned via an accredited carrier with tracking—return shipping costs are the customer’s responsibility unless the item was defective or shipped incorrectly.</li>
+                <li>Accompanied by proof of purchase (order number or receipt).</li>
+            </ul>
+
+            <h4 class="mb-5 mt-2">Contact for Returns</h4>
+            <p>If you have any questions or need assistance, please reach out to our Customer Service:</p>
+            <p>
+                <strong>REGIONE SICILIANA</strong><br>
+                PIAZZA INDIPENDENZA 21,<br>
+                90129 PALERMO, ITALY<br>
+                VAT No. 02711070827<br>
+                WhatsApp: <a href="https://wa.me/393511332891">+39 351 133 2891</a>
+            </p>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+
+
+
+
+    <!-- Mobile Menu Start -->
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+            <div class="logo-box">
+                <a href="{% url 'home' %} " aria-label="logo image"><img src="{% static 'assets/media/mobile-logo.png' %}" alt=""></a>
+            </div>
+            <div class="mobile-nav__container"></div>
+            <ul class="mobile-nav__contact list-unstyled">
+                                     <li>
+  <a href="{% url 'cart' %}"
+     class="{% if request.path == request.build_absolute_uri|cut:request.get_host %}{% url 'cart' %}active{% endif %}">
+      Shoping cart
+  </a>
+</li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:example@company.com">info@regionesicilianait.com
+</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:+393511332891">+393511332891</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu End -->
+
+
+
+{% endblock contents %}  

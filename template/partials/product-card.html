@@ -1,0 +1,42 @@
+{% load static %}
+{% load humanize %}
+
+<div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+    <div class="featured-product-card bg-white br-10">
+      <div class="image-box mb-16">
+        <a href="{% url 'product_detail' product.pk %}">
+          <img
+            src="{{ product.resized_image }}"
+            alt="{{ product.name }}"
+            class="product-image"
+            width="348" height="328"
+          />
+        </a>
+      </div>
+      <div class="product-desc">
+        <h6 class="product-title mb-8 text-center">
+          <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+        </h6>
+        <div class="rating-star mb-16 bg-white">
+          <h5 class="color-sec mb-24 text-center">
+            {% if product.rating %}
+              {% for i in "12345" %}
+                {% if forloop.counter <= product.rating|floatformat:0 %}★{% else %}<span class="light-gray">★</span>{% endif %}
+              {% endfor %}
+              &nbsp;&nbsp;<span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+            {% else %}
+              <span class="light-gray">★★★★★</span>&nbsp;&nbsp;<span class="text-16 fw-400 dark-black">(0)</span>
+            {% endif %}
+          </h5>
+          <h6 class="text-center">€{{ product.price|floatformat:2|intcomma }}</h6>
+        </div>
+                      
+                                  <button  data-product-id="{{ product.id }}"
+                                      data-add-to-cart-url="{% url 'add_to_cart' product.id %}"
+                                      data-csrf-token="{{ csrf_token }}" class="cus-btn-2 w-100 add-to-cart-btn"><span class="btn-text">Add to Cart</span>
+                                                      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+      </div>
+    </div>
+  </div>
+  

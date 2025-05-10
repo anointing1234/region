@@ -1,0 +1,716 @@
+{% extends "../core/base/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block contents %}
+    
+
+        <!-- Main Sections -->
+        <main class="main-wrapper">
+            <section class="hero-banner py-24">
+                <div class="container-fluid">
+                    <div class="row row-gap-3">
+                        <div class="col-xl-8 col-lg-12">
+                            <div class="banner-right">
+                                <div class="banner-content-right">
+                                    <div class="text-box">
+                                        <h6 class="color-ter mb-32 d-sm-block d-none">EXPERIENCE IMMERSIVE SOUND</h6>
+                                        <h2 class="white fw-600 mb-8">Elevate Your Audio <br> with <span class="color-ter">Premium</span> Devices</h2>
+                                        <h6 class="white mb-32">Discover High-Fidelity Headphones, Speakers & More!</h6>
+                                        <a href="shop-list-1.html" class="cus-btn-3 sec">Explore Our Range</a>
+                                    </div>
+                                    <div class="image-area">
+                                        <img src="{% static 'assets/media/banner/banner-sub-1.webp' %}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-12">
+                            <div class="d-xl-block d-sm-flex gap-16">
+                                <div class="banner-right mb-16">
+                                    <div class="banner-content-right v-2">
+                                        <div class="text-box">
+                                            <h5 class="fw-500 mb-16"><a  class="white">Powerful Bass, Crystal Clear Sound: <br> <span class="color-ter">Nexus&nbsp;</span>Headphones</a></h5>
+                                            <p class="white fw-500">Limited Stock - Order Yours Today!</p>
+                                        </div>
+                                        <div class="image-area">
+                                            <a><img src="{% static 'assets/media/banner/banner-sub-2..webp' %}" alt=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="banner-right">
+                                    <div class="banner-content-right v-3">
+                                        <div class="text-box">
+                                            <h5 class="fw-500 mb-16"><a  class="white">Compact & Mighty: <br> <span class="color-ter">AuraSound&nbsp;</span>Portable Speaker</a></h5>
+                                            <p class="white fw-500">Perfect for Music On The Go!</p>
+                                        </div>
+                                        <div class="image-area">
+                                            <a ><img src="{% static 'assets/media/banner/banner-sub-3.webp' %}" alt=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Featured Product Start -->
+            <section class="featured-product-sec py-40 bg-lightest-gray">
+                <div class="container-fluid">
+                    <div class="row row-gap-3">
+                        <div class="col-xl-3">
+                            <a href="" class="main-card text-center">
+                                <h4 class="fw-500 white mb-32">Audio Specials</h4>
+                                <div class="image mb-32">
+                                    <img src="{% static 'assets/media/featured-audio.png' %}" alt="Featured Audio">
+                                </div>
+                                <h5 class="fw-500 white mb-20 text-center">Explore Premium Audio Experiences</h5>
+                                <h6 class="fw-400 white text-center">Discover High-Quality Sound</h6>
+                            </a>
+                        </div>
+                        <div class="col-xl-9">
+                            <div class="top-bar mb-16">
+                                <h5>Feature Products</h5>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="laptop-tab" data-bs-toggle="tab" data-bs-target="#Amplifiers" type="button"
+                                            role="tab" aria-controls="laptop" aria-selected="false">Amplifiers</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="keyboard-tab" data-bs-toggle="tab" data-bs-target="#Turntables" type="button"
+                                            role="tab" aria-controls="keyboard" aria-selected="false">Turntables</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="mouse-tab" data-bs-toggle="tab" data-bs-target="#Loudspeakers" type="button"
+                                            role="tab" aria-controls="mouse" aria-selected="false">Loudspeakers</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="headphone-tab" data-bs-toggle="tab" data-bs-target="#Digital" type="button"
+                                            role="tab" aria-controls="headphone" aria-selected="false">Digital</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content" id="myTabContent">
+
+                                <div class="tab-pane fade show active" id="Amplifiers" role="tabpanel" aria-labelledby="laptop-tab">
+                                    <div class="row row-gap-3">
+                                        <div class="row">
+                                            {% for product in Amplifies|slice:":3" %}
+                                              <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+                                                <div class="featured-product-card bg-white br-10">
+                                                  <div class="image-box mb-16">
+                                                    <a href="{% url 'product_detail' product.pk %}">
+                                                      <img
+                                                        src="{{ product.resized_image }}"
+                                                        alt="{{ product.name }}"
+                                                        class="product-image"
+                                                        width="348" height="328"
+                                                      />
+                                                    </a>
+                                                  </div>
+                                                  <div class="product-desc">
+                                                    <h6 class="product-title mb-8 text-center">
+                                                      <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+                                                    </h6>
+                                                    <div class="rating-star mb-16 bg-white">
+                                                      <h5 class="color-sec mb-24 text-center">
+                                                        {% if product.rating %}
+                                                          {% for i in "12345" %}
+                                                            {% if forloop.counter <= product.rating|floatformat:0 %}
+                                                              ★
+                                                            {% else %}
+                                                              <span class="light-gray">★</span>
+                                                            {% endif %}
+                                                          {% endfor %}
+                                                          &nbsp;&nbsp;
+                                                          <span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+                                                        {% else %}
+                                                          <span class="light-gray">★★★★★</span>
+                                                          &nbsp;&nbsp;
+                                                          <span class="text-16 fw-400 dark-black">(0)</span>
+                                                        {% endif %}
+                                                      </h5>
+                                                      <h6 class="text-center">
+                                                        €{{ product.price|floatformat:2|intcomma }}
+                                                      </h6>
+                                                    </div>
+                                                                 
+                                  <button  data-product-id="{{ product.id }}"
+                                      data-add-to-cart-url="{% url 'add_to_cart' product.id %}"
+                                      data-csrf-token="{{ csrf_token }}" class="cus-btn-2 w-100 add-to-cart-btn"><span class="btn-text">Add to Cart</span>
+                                                      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            {% empty %}
+                                              <div class="col-12">
+                                                <div class="alert alert-info text-center br-10 py-4">
+                                                  Product not available for now.
+                                                </div>
+                                              </div>
+                                            {% endfor %}
+                                          </div>    
+                                   </div>
+                                </div>
+
+
+
+
+
+
+                                <div class="tab-pane fade" id="Turntables" role="tabpanel" aria-labelledby="keyboard-tab">
+                                    <div class="row row-gap-3">
+                                       
+                                        {% for product in Turntables|slice:":3" %}
+                                              <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+                                                <div class="featured-product-card bg-white br-10">
+                                                  <div class="image-box mb-16">
+                                                    <a href="{% url 'product_detail' product.pk %}">
+                                                      <img
+                                                        src="{{ product.resized_image }}"
+                                                        alt="{{ product.name }}"
+                                                        class="product-image"
+                                                        width="348" height="328"
+                                                      />
+                                                    </a>
+                                                  </div>
+                                                  <div class="product-desc">
+                                                    <h6 class="product-title mb-8 text-center">
+                                                      <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+                                                    </h6>
+                                                    <div class="rating-star mb-16 bg-white">
+                                                      <h5 class="color-sec mb-24 text-center">
+                                                        {% if product.rating %}
+                                                          {% for i in "12345" %}
+                                                            {% if forloop.counter <= product.rating|floatformat:0 %}
+                                                              ★
+                                                            {% else %}
+                                                              <span class="light-gray">★</span>
+                                                            {% endif %}
+                                                          {% endfor %}
+                                                          &nbsp;&nbsp;
+                                                          <span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+                                                        {% else %}
+                                                          <span class="light-gray">★★★★★</span>
+                                                          &nbsp;&nbsp;
+                                                          <span class="text-16 fw-400 dark-black">(0)</span>
+                                                        {% endif %}
+                                                      </h5>
+                                                      <h6 class="text-center">
+                                                        €{{ product.price|floatformat:2|intcomma }}
+                                                      </h6>
+                                                    </div>
+                                                                   
+                                  <button  data-product-id="{{ product.id }}"
+                                      data-add-to-cart-url="{% url 'add_to_cart' product.id %}"
+                                      data-csrf-token="{{ csrf_token }}" class="cus-btn-2 w-100 add-to-cart-btn"><span class="btn-text">Add to Cart</span>
+                                                      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            {% empty %}
+                                              <div class="col-12">
+                                                <div class="alert alert-info text-center br-10 py-4">
+                                                  Product not available for now.
+                                                </div>
+                                              </div>
+                                            {% endfor %}
+                                 
+
+
+                                   </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+                                <div class="tab-pane fade" id="Loudspeakers" role="tabpanel" aria-labelledby="mouse-tab">
+                                    <div class="row row-gap-3">
+                                        {% for product in Loudspeakers|slice:":3" %}
+                                        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+                                          <div class="featured-product-card bg-white br-10">
+                                            <div class="image-box mb-16">
+                                              <a href="{% url 'product_detail' product.pk %}">
+                                                <img
+                                                  src="{{ product.resized_image }}"
+                                                  alt="{{ product.name }}"
+                                                  class="product-image"
+                                                  width="348" height="328"
+                                                />
+                                              </a>
+                                            </div>
+                                            <div class="product-desc">
+                                              <h6 class="product-title mb-8 text-center">
+                                                <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+                                              </h6>
+                                              <div class="rating-star mb-16 bg-white">
+                                                <h5 class="color-sec mb-24 text-center">
+                                                  {% if product.rating %}
+                                                    {% for i in "12345" %}
+                                                      {% if forloop.counter <= product.rating|floatformat:0 %}
+                                                        ★
+                                                      {% else %}
+                                                        <span class="light-gray">★</span>
+                                                      {% endif %}
+                                                    {% endfor %}
+                                                    &nbsp;&nbsp;
+                                                    <span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+                                                  {% else %}
+                                                    <span class="light-gray">★★★★★</span>
+                                                    &nbsp;&nbsp;
+                                                    <span class="text-16 fw-400 dark-black">(0)</span>
+                                                  {% endif %}
+                                                </h5>
+                                                <h6 class="text-center">
+                                                  €{{ product.price|floatformat:2|intcomma }}
+                                                </h6>
+                                              </div>
+                                                            
+                                  <button  data-product-id="{{ product.id }}"
+                                      data-add-to-cart-url="{% url 'add_to_cart' product.id %}"
+                                      data-csrf-token="{{ csrf_token }}" class="cus-btn-2 w-100 add-to-cart-btn"><span class="btn-text">Add to Cart</span>
+                                                      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      {% empty %}
+                                        <div class="col-12">
+                                          <div class="alert alert-info text-center br-10 py-4">
+                                            Product not available for now.
+                                          </div>
+                                        </div>
+                                      {% endfor %}
+                           
+
+
+                                   </div>
+                                </div>
+
+
+
+
+
+                                <div class="tab-pane fade" id="Digital" role="tabpanel" aria-labelledby="headphone-tab">
+                                    <div class="row row-gap-3">
+                                        {% for product in Digital|slice:":3" %}
+                                        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+                                          <div class="featured-product-card bg-white br-10">
+                                            <div class="image-box mb-16">
+                                              <a href="{% url 'product_detail' product.pk %}">
+                                                <img
+                                                  src="{{ product.resized_image }}"
+                                                  alt="{{ product.name }}"
+                                                  class="product-image"
+                                                  width="348" height="328"
+                                                />
+                                              </a>
+                                            </div>
+                                            <div class="product-desc">
+                                              <h6 class="product-title mb-8 text-center">
+                                                <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+                                              </h6>
+                                              <div class="rating-star mb-16 bg-white">
+                                                <h5 class="color-sec mb-24 text-center">
+                                                  {% if product.rating %}
+                                                    {% for i in "12345" %}
+                                                      {% if forloop.counter <= product.rating|floatformat:0 %}
+                                                        ★
+                                                      {% else %}
+                                                        <span class="light-gray">★</span>
+                                                      {% endif %}
+                                                    {% endfor %}
+                                                    &nbsp;&nbsp;
+                                                    <span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+                                                  {% else %}
+                                                    <span class="light-gray">★★★★★</span>
+                                                    &nbsp;&nbsp;
+                                                    <span class="text-16 fw-400 dark-black">(0)</span>
+                                                  {% endif %}
+                                                </h5>
+                                                <h6 class="text-center">
+                                                  €{{ product.price|floatformat:2|intcomma }}
+                                                </h6>
+                                              </div>
+                                                      
+                                  <button  data-product-id="{{ product.id }}"
+                                      data-add-to-cart-url="{% url 'add_to_cart' product.id %}"
+                                      data-csrf-token="{{ csrf_token }}" class="cus-btn-2 w-100 add-to-cart-btn"><span class="btn-text">Add to Cart</span>
+                                                      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      {% empty %}
+                                        <div class="col-12">
+                                          <div class="alert alert-info text-center br-10 py-4">
+                                            Product not available for now.
+                                          </div>
+                                        </div>
+                                      {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Featured Product End -->
+
+            <!-- Popular Product Start -->
+<section class="popular-product bg-lightest-gray pt-24 pb-40">
+  <div class="container-fluid">
+    <div class="top-bar mb-16">
+      <h5>Popular Products</h5>
+      <ul class="nav nav-tabs" id="myProduct" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active"
+                  id="all-product-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#all-product"
+                  type="button"
+                  role="tab"
+                  aria-controls="all-product"
+                  aria-selected="true">
+            All Products
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link"
+                  id="amplifiers-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#amplifiers-pro"
+                  type="button"
+                  role="tab"
+                  aria-controls="amplifiers-pro"
+                  aria-selected="false">
+            Amplifiers
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link"
+                  id="turntables-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#turntables-pro"
+                  type="button"
+                  role="tab"
+                  aria-controls="turntables-pro"
+                  aria-selected="false">
+            Turntables
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link"
+                  id="loudspeakers-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#loudspeakers-pro"
+                  type="button"
+                  role="tab"
+                  aria-controls="loudspeakers-pro"
+                  aria-selected="false">
+            Loudspeakers
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link"
+                  id="digital-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#digital-pro"
+                  type="button"
+                  role="tab"
+                  aria-controls="digital-pro"
+                  aria-selected="false">
+            Digital
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="myProductContent">
+
+      {# --- ALL PRODUCTS --- #}
+      <div class="tab-pane fade show active"
+           id="all-product"
+           role="tabpanel"
+           aria-labelledby="all-product-tab">
+        <div class="row row-gap-3">
+          {% for product in all_products|slice:":3" %}
+            {% include "partials/product-card.html" %}
+          {% empty %}
+            <div class="col-12">
+              <div class="alert alert-info text-center br-10 py-4">
+                Products not available for now.
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {# --- AMPLIFIERS --- #}
+      <div class="tab-pane fade"
+           id="amplifiers-pro"
+           role="tabpanel"
+           aria-labelledby="amplifiers-tab">
+        <div class="row row-gap-3">
+          {% for product in Amplifies|slice:":3" %}
+            {% include "partials/product-card.html" %}
+          {% empty %}
+            <div class="col-12">
+              <div class="alert alert-info text-center br-10 py-4">
+                Amplifiers not available for now.
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {# --- TURNTABLES --- #}
+      <div class="tab-pane fade"
+           id="turntables-pro"
+           role="tabpanel"
+           aria-labelledby="turntables-tab">
+        <div class="row row-gap-3">
+          {% for product in Turntables|slice:":3" %}
+            {% include "partials/product-card.html" %}
+          {% empty %}
+            <div class="col-12">
+              <div class="alert alert-info text-center br-10 py-4">
+                Turntables not available for now.
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {# --- LOUDSPEAKERS --- #}
+      <div class="tab-pane fade"
+           id="loudspeakers-pro"
+           role="tabpanel"
+           aria-labelledby="loudspeakers-tab">
+        <div class="row row-gap-3">
+          {% for product in Loudspeakers|slice:":3" %}
+            {% include "partials/product-card.html" %}
+          {% empty %}
+            <div class="col-12">
+              <div class="alert alert-info text-center br-10 py-4">
+                Loudspeakers not available for now.
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {# --- DIGITAL --- #}
+      <div class="tab-pane fade"
+           id="digital-pro"
+           role="tabpanel"
+           aria-labelledby="digital-tab">
+        <div class="row row-gap-3">
+          {% for product in Digital|slice:":3" %}
+            {% include "partials/product-card.html" %}
+          {% empty %}
+            <div class="col-12">
+              <div class="alert alert-info text-center br-10 py-4">
+                Digital products not available for now.
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Popular Product End -->
+
+
+            <!-- Inner Banner Start -->
+            <section class="inner-banner">
+                <div class="container-fluid">
+                  <div class="inner-content d-flex align-items-center justify-content-between">
+                    
+                    <div class="inner-text">
+                      <h2 class="white mb-3">
+                        Elevate Your Sound<br>
+                        <span class="color-ter">Discover Premium Audio</span> at Unbeatable Prices
+                      </h2>
+                  
+                     
+                    </div>
+                    
+                    <div class="inner-image">
+                      <img
+                        src="{% static 'assets/media/images/banner-image-1.png' %}"
+                        width="220"
+                        alt="High-end audio equipment"
+                      />
+                    </div>
+                    
+                  </div>
+                </div>
+              </section>
+              
+            <!-- Inner Banner End -->
+
+            <!-- Recommended Product Start -->
+            <section class="recommended-product bg-lightest-gray py-40">
+                <div class="container-fluid">
+                    <div class="top-bar mb-16">
+                        <h5>Recommended Products</h5>
+                        <a href="shop-grid-sidebar-1.html" class="cus-btn-arrow"> Show All 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 20 15" fill="none">
+                                <path
+                                    d="M13.3545 14.7476C13.3545 11.7476 16.1545 7.74756 19.3545 7.74756M19.3545 7.74756C17.5212 7.74756 13.3545 6.74756 13.3545 0.747559M19.3545 7.74756H0.354492"
+                                    stroke="#0C0C0D" stroke-width="2" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="row row-gap-3">
+
+                        {% for product in bestsellers|slice:":3" %}
+                        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6">
+                          <div class="featured-product-card bg-white br-10">
+                            <div class="image-box mb-16">
+                              <a href="{% url 'product_detail' product.pk %}">
+                                <img
+                                  src="{{ product.resized_image }}"
+                                  alt="{{ product.name }}"
+                                  class="product-image"
+                                  width="348" height="328"
+                                />
+                              </a>
+                            </div>
+                            <div class="product-desc">
+                              <h6 class="product-title mb-8 text-center">
+                                <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+                              </h6>
+                              <div class="rating-star mb-16 bg-white">
+                                <h5 class="color-sec mb-24 text-center">
+                                  {% if product.rating %}
+                                    {% for i in "12345" %}
+                                      {% if forloop.counter <= product.rating|floatformat:0 %}
+                                        ★
+                                      {% else %}
+                                        <span class="light-gray">★</span>
+                                      {% endif %}
+                                    {% endfor %}
+                                    &nbsp;&nbsp;
+                                    <span class="text-16 fw-400 dark-black">({{ product.review_count|default:0 }})</span>
+                                  {% else %}
+                                    <span class="light-gray">★★★★★</span>
+                                    &nbsp;&nbsp;
+                                    <span class="text-16 fw-400 dark-black">(0)</span>
+                                  {% endif %}
+                                </h5>
+                                <h6 class="text-center">
+                                  €{{ product.price|floatformat:2|intcomma }}
+                                </h6>
+                              </div>
+                              <a href="cart.html" class="cus-btn-2 w-100">Add to Cart</a>
+                            </div>
+                          </div>
+                        </div>
+                      {% empty %}
+                        <div class="col-12">
+                          <div class="alert alert-info text-center br-10 py-4">
+                            Product not available for now.
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                        
+                    </div>
+                </div>
+            </section>
+            <!-- Recommended Product End -->
+
+            <!-- Inner Banner Start -->
+            <section class="inner-banner">
+                <div class="container-fluid">
+                    <div class="inner-content v-2">
+                        <div class="inner-text">
+                            <h2 class="white"><span class="color-ter">Hurry up!</span>&nbsp;Offer ends in</h2>
+                        </div>
+                        <div class="coming-soon-cd">
+                            <ul class="unstyled countdown">
+                                <li>
+                                    <h2 class="h5">365</h2>
+                                    <h6 class="fw-500">Days</h6>
+                                </li>
+                                <li>
+                                    <h2 class="h5">24</h2>
+                                    <h6 class="fw-500">Hrs</h6>
+                                </li>
+                                <li>
+                                    <h2 class="h5">60</h2>
+                                    <h6 class="fw-500">Min</h6>
+                                </li>
+                                <li>
+                                    <h2 class="h5">60</h2>
+                                    <h6 class="fw-500">Secs</h6>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="inner-image-2">
+                            <img src="{% static 'assets/media/banner/banner-sub-3.webp' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Inner Banner End -->
+
+
+        <!-- Main Sections -->
+    </div>
+    <!-- Main Wrapper End -->
+
+    <!-- Back To Top Start -->
+    <a href="#main-wrapper" id="backto-top" class="back-to-top"><i class="fas fa-angle-up"></i></a>
+    
+
+    <!-- Mobile Menu Start -->
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+            <div class="logo-box">
+                <a href="{% url 'home' %} " aria-label="logo image"><img src="{% static 'assets/media/mobile-logo.png' %}" alt=""></a>
+            </div>
+            <div class="mobile-nav__container"></div>
+            <ul class="mobile-nav__contact list-unstyled">
+                                     <li>
+  <a href="{% url 'cart' %}"
+     class="{% if request.path == request.build_absolute_uri|cut:request.get_host %}{% url 'cart' %}active{% endif %}">
+      Shoping cart
+  </a>
+</li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:example@company.com">info@regionesicilianait.com
+</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:+393511332891">+393511332891</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu End -->
+
+
+    {% endblock contents %}     
