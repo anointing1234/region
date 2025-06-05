@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-bok31!y8!tkdvcre79(u&p03)g+zbdi1b6*hk5md1-j1(#gfc)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ["*"]
 ALLOWED_HOSTS = ["regionesicilianait.com"]
