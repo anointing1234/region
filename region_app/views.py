@@ -28,70 +28,70 @@ from PIL import Image
 
 
 
-
 def home_view(request):
     # helper to build a list of products with a `resized_image` data-URI
     def get_resized_products(qs):
         resized = []
         for p in qs:
-            # default placeholder if no image
-            data_uri = ''
-            if p.image and p.image.path:
-                # open, convert, resize
-                img = Image.open(p.image.path)
-                if img.mode in ("RGBA", "P"):
-                    img = img.convert("RGB")
-                img = img.resize((348, 328), Image.LANCZOS)
+            data_uri = ''  # Default placeholder
 
-                # write to buffer as high-quality JPEG (or WebP if you prefer)
-                buf = BytesIO()
-                img.save(buf, format="JPEG", quality=90)
-                buf.seek(0)
+            try:
+                if p.image and p.image.path and os.path.isfile(p.image.path):
+                    # open, convert, resize
+                    img = Image.open(p.image.path)
+                    if img.mode in ("RGBA", "P"):
+                        img = img.convert("RGB")
+                    img = img.resize((348, 328), Image.LANCZOS)
 
-                # encode to base64 and form data URI
-                b64 = base64.b64encode(buf.read()).decode()
-                data_uri = f"data:image/jpeg;base64,{b64}"
+                    # write to buffer as high-quality JPEG
+                    buf = BytesIO()
+                    img.save(buf, format="JPEG", quality=90)
+                    buf.seek(0)
+
+                    # encode to base64 and form data URI
+                    b64 = base64.b64encode(buf.read()).decode()
+                    data_uri = f"data:image/jpeg;base64,{b64}"
+            except (FileNotFoundError, UnidentifiedImageError, ValueError):
+                # Log or silently pass on error (image missing, corrupt, etc.)
+                data_uri = None  # Or keep as '' if preferred
 
             # attach it to the product instance
             p.resized_image = data_uri
             resized.append(p)
         return resized
-    
-    featured_products = Product.objects.filter(product_tag=Product.FEATURED)
-    bestsellers = Product.objects.filter(product_tag='Bestsellers')
-    New_arrivals = Product.objects.filter(product_tag='New Arrivals')
-    Top_rated = Product.objects.filter(product_tag='Top Rated')
-    On_sale = Product.objects.filter(product_tag='Sale')
-    all_products = Product.objects.all()
 
-    # fetch your groups
+    # Queries
+    featured_products = Product.objects.filter(product_tag=Product.FEATURED)
+    bestsellers       = Product.objects.filter(product_tag='Bestsellers')
+    New_arrivals      = Product.objects.filter(product_tag='New Arrivals')
+    Top_rated         = Product.objects.filter(product_tag='Top Rated')
+    On_sale           = Product.objects.filter(product_tag='Sale')
+    all_products_qs   = Product.objects.all()
+
     Amplifies     = Product.objects.filter(product_category='Amplifiers')
     Digital       = Product.objects.filter(product_category='Digital')
     Loudspeakers  = Product.objects.filter(product_category='Loudspeakers')
     Turntables    = Product.objects.filter(product_category='Turntables')
 
-    # build resized versions
+    # Resize for display
     Amplifies     = get_resized_products(Amplifies)
     Digital       = get_resized_products(Digital)
     Loudspeakers  = get_resized_products(Loudspeakers)
     Turntables    = get_resized_products(Turntables)
-    all_products  = get_resized_products(all_products)
-    
+    all_products  = get_resized_products(all_products_qs)
 
     return render(request, 'home/index.html', {
-        'Amplifies':    Amplifies,
-        'Digital':      Digital,
+        'Amplifies': Amplifies,
+        'Digital': Digital,
         'Loudspeakers': Loudspeakers,
-        'Turnatables':  Turntables,
+        'Turnatables': Turntables,
         'featured_products': featured_products,
         'bestsellers': bestsellers,
-        'New_arrivals':New_arrivals,
-        'Top_rated':Top_rated,
+        'New_arrivals': New_arrivals,
+        'Top_rated': Top_rated,
         'on_sale': On_sale,
         'all_products': all_products,
-        # …include your other contexts as before…
     })
-
 
 
 def resize_product(product):
